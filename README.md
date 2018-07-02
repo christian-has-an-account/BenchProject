@@ -28,10 +28,10 @@ OnshoreKPI-API (Version 0.01)  06/31/2018
 GENERAL NOTES 
 ---------------------------------------------------------------------------------------
 
--OnshoreKPI-API (Version 0.01) Is Currently A Basic Blank Template To Layout The File Structure
+- OnshoreKPI-API (Version 0.01) Is Currently A Basic Blank Template To Layout The File Structure
 Of The API.
 
--OnshoreKPI-API Is Purposed For The Communication Of Information Between KPI.DB And The Angular5
+- OnshoreKPI-API Is Purposed For The Communication Of Information Between KPI.DB And The Angular5
 Front End (OnshoreKPI-FrontEnd).
 
 =======================================================================================
@@ -42,10 +42,10 @@ OnshoreKPI-FrontEnd (Version 0.01) 06/31/2018
 GENERAL NOTES 
 ---------------------------------------------------------------------------------------
 
--OnshoreKPI-FrontEnd (Version 0.01) Is Currently A Basic Blank Template To Layout The File Structure
+- OnshoreKPI-FrontEnd (Version 0.01) Is Currently A Basic Blank Template To Layout The File Structure
 For The Angular5 Front-End Application.
 
--The Project Is Purposed For The Submission, Viewing, Editing, And Deletion Of Reports
+- The Project Is Purposed For The Submission, Viewing, Editing, And Deletion Of Reports
 By Employees Of Onshore Outsourcing. It Will Be Used To Calculate The Productivity Of Employees, 
 Teams, And Clients Through The Total Amount Of Time Elapsed And The Amount Of Tasks Completed In 
 Comparison To The Amount Of Time The Task Should Take To Complete.
