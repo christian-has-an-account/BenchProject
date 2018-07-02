@@ -19,7 +19,7 @@ GENERAL NOTES
 
 - KPI.DB.BAK (Version 1.0) Is Purposed For Tracking The Performance Rate of Idividual-
 Employees, Teams, and Clients Through the Given Data of 'Reports'.
-=======================================================================================
+==============================================================================
 
 OnshoreKPI-API (Version 0.01)  06/31/2018
 
@@ -34,7 +34,7 @@ Of The API.
 - OnshoreKPI-API Is Purposed For The Communication Of Information Between KPI.DB And The Angular5
 Front End (OnshoreKPI-FrontEnd).
 
-=======================================================================================
+=================================================================================
 
 OnshoreKPI-FrontEnd (Version 0.01) 06/31/2018
 
