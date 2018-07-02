@@ -9,9 +9,8 @@ SOFTWARE PREREQUISITES
 
 Microsoft SQL SERVER MANAGEMENT STUDIO Version 14.0.17254.0
 
-KPI.DB.BAK (Version 1.0) Is Running The Current Up-To-Date Version Of 
-SQL Server (SQL Server 14.0.1000.169) And Thus KPI.DB.BAK Cannot Be Restored To Any previous
-Version Of SQL Server.
+KPI.DB.BAK (Version 1.0) Is Running The Current Up-To-Date Version Of SQL Server 
+(SQL Server 14.0.1000.169) And Thus Cannot Be Restored To Any previous Version Of SQL Server.
 
 --------------------------------------------------------------------------------------
 GENERAL NOTES 
