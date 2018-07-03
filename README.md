@@ -26,13 +26,13 @@ OnshoreKPI-API (Version 0.01)  06/31/2018
 ---------------------------------------------------------------------------------------
 GENERAL NOTES 
 ---------------------------------------------------------------------------------------
-
+<spoiler>
 - OnshoreKPI-API (Version 0.01) Is Currently A Basic Blank Template To Layout The File Structure
 Of The API.
 
 - OnshoreKPI-API Is Purposed For The Communication Of Information Between KPI.DB And The Angular5
 Front End (OnshoreKPI-FrontEnd).
-
+</spoiler>
 - 07/03/2018 V0.2 Updated with models and basic controllers from Entity Framework.
 
 =================================================================================
