@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="KPI.dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ClientID" />
+    </Key>
+    <Property Name="ClientID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+    <Property Name="ClientName" Nullable="false" MaxLength="50" Type="varchar" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+    <Property Name="RoleID" Nullable="false" Type="int" />
+    <Property Name="ClientID" Type="int" />
+    <Property Name="ClientID2" Type="int" />
+    <Property Name="ClientID3" Type="int" />
+    <Property Name="ClientID4" Type="int" />
+    <Property Name="TeamID" Type="int" />
+    <Property Name="TypeID" Type="int" />
+    <Property Name="FirstName" Nullable="false" MaxLength="35" Type="nchar" />
+    <Property Name="LastName" Nullable="false" MaxLength="35" Type="nchar" />
+    <Property Name="Email" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Password" Nullable="false" MaxLength="25" Type="nvarchar" />
+  </EntityType>
+  <EntityType Name="EmployeeType">
+    <Key>
+      <PropertyRef Name="TypeID" />
+    </Key>
+    <Property Name="TypeID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+    <Property Name="TypeName" Nullable="false" MaxLength="50" Type="varchar" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'KPI.db.dbo.Reporting' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Reporting">
+    <Key>
+      <PropertyRef Name="ReportingID" />
+      <PropertyRef Name="EmployeeID" />
+      <PropertyRef Name="ClientID" />
+      <PropertyRef Name="TeamID" />
+      <PropertyRef Name="StartTime" />
+      <PropertyRef Name="CompletionTime" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Name2" />
+      <PropertyRef Name="Date" />
+      <PropertyRef Name="Quantity" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="Task" />
+    </Key>
+    <Property Name="ReportingID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+    <Property Name="EmployeeID" Nullable="false" Type="int" />
+    <Property Name="ClientID" Nullable="false" Type="int" />
+    <Property Name="TeamID" Nullable="false" Type="int" />
+    <Property Name="StartTime" Nullable="false" Precision="0" Type="time" />
+    <Property Name="CompletionTime" Nullable="false" Precision="0" Type="time" />
+    <Property Name="Name" Nullable="false" MaxLength="35" Type="varchar" />
+    <Property Name="Name2" Nullable="false" MaxLength="35" Type="varchar" />
+    <Property Name="Date" Nullable="false" Type="date" />
+    <Property Name="Quantity" Nullable="false" Type="int" />
+    <Property Name="TextScriptExecutionOrders" Type="int" />
+    <Property Name="TextScriptCreationErrors" Type="int" />
+    <Property Name="CardPoints" Precision="2" Scale="2" Type="decimal" />
+    <Property Name="TimeSpent" Precision="2" Scale="2" Type="decimal" />
+    <Property Name="HoursComplete" Precision="2" Scale="2" Type="decimal" />
+    <Property Name="HoursEstimated" Precision="2" Scale="2" Type="decimal" />
+    <Property Name="Email" Nullable="false" MaxLength="60" Type="varchar" />
+    <Property Name="Task" Nullable="false" Type="text" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+    <Property Name="RoleName" Nullable="false" MaxLength="35" Type="varchar" />
+  </EntityType>
+  <EntityType Name="Team">
+    <Key>
+      <PropertyRef Name="TeamID" />
+    </Key>
+    <Property Name="TeamID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+    <Property Name="ClientID" Nullable="false" Type="int" />
+    <Property Name="TeamName" Nullable="false" MaxLength="50" Type="varchar" />
+  </EntityType>
+  <Association Name="FK Employee FROM Client">
+    <End Type="Self.Client" Multiplicity="0..1" Role="Client" />
+    <End Type="Self.Employee" Multiplicity="*" Role="Employee" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Employee FROM Roles">
+    <End Type="Self.Roles" Multiplicity="1" Role="Roles" />
+    <End Type="Self.Employee" Multiplicity="*" Role="Employee" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Employee FROM Team">
+    <End Type="Self.Team" Multiplicity="0..1" Role="Team" />
+    <End Type="Self.Employee" Multiplicity="*" Role="Employee" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="TeamID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="TeamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Employee FROM Type">
+    <End Type="Self.EmployeeType" Multiplicity="0..1" Role="EmployeeType" />
+    <End Type="Self.Employee" Multiplicity="*" Role="Employee" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeeType">
+        <PropertyRef Name="TypeID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Reporting FROM Client">
+    <End Type="Self.Client" Multiplicity="1" Role="Client" />
+    <End Type="Self.Reporting" Multiplicity="*" Role="Reporting" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="Reporting">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Reporting FROM Employee">
+    <End Type="Self.Employee" Multiplicity="1" Role="Employee" />
+    <End Type="Self.Reporting" Multiplicity="*" Role="Reporting" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Reporting">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Reporting FROM Team">
+    <End Type="Self.Team" Multiplicity="1" Role="Team" />
+    <End Type="Self.Reporting" Multiplicity="*" Role="Reporting" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="TeamID" />
+      </Principal>
+      <Dependent Role="Reporting">
+        <PropertyRef Name="TeamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK Team FROM Client">
+    <End Type="Self.Client" Multiplicity="1" Role="Client" />
+    <End Type="Self.Team" Multiplicity="*" Role="Team" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="Team">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_DeleteClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ClientID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_DeleteReportsByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ReportingID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_DeleteRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RoleID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_DeleteTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ClientID" Type="int" Mode="In" />
+    <Parameter Name="TeamID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetAllClients" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetAllEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetAllEmployeeTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetAllReports" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetAllRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetAllTeams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetAllTeamsByClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ClientID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetEmployeeByClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ClientID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetEmployeeByEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Email" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_GetEmployeeByTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ClientID" Type="int" Mode="In" />
+    <Parameter Name="TeamID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetReportsByClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ClientID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetReportsByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Date" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_GetReportsByEmployeeID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetReportsByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GetReportsByProxySubmission" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_GetReportsByTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TeamID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetReportsSelfSubmission" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_NewClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ClientName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_NewEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RoleID" Type="int" Mode="In" />
+    <Parameter Name="ClientID" Type="int" Mode="In" />
+    <Parameter Name="TeamID" Type="int" Mode="In" />
+    <Parameter Name="TypeID" Type="int" Mode="In" />
+    <Parameter Name="FirstName" Type="nchar" Mode="In" />
+    <Parameter Name="LastName" Type="nchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_NewEmployeeType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TypeName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_NewReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ReportingID" Type="int" Mode="In" />
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+    <Parameter Name="ClientID" Type="int" Mode="In" />
+    <Parameter Name="TeamID" Type="int" Mode="In" />
+    <Parameter Name="StartTime" Type="datetime" Mode="In" />
+    <Parameter Name="CompletionTime" Type="datetime" Mode="In" />
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+    <Parameter Name="Name2" Type="varchar" Mode="In" />
+    <Parameter Name="Date" Type="date" Mode="In" />
+    <Parameter Name="Quantity" Type="int" Mode="In" />
+    <Parameter Name="TextScriptExecutionOrders" Type="int" Mode="In" />
+    <Parameter Name="TextScriptCreationErrors" Type="int" Mode="In" />
+    <Parameter Name="CardPoints" Type="decimal" Mode="In" />
+    <Parameter Name="TimeSpent" Type="decimal" Mode="In" />
+    <Parameter Name="HoursEstimated" Type="decimal" Mode="In" />
+    <Parameter Name="HoursComplete" Type="decimal" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="Task" Type="text" Mode="In" />
+  </Function>
+  <Function Name="sp_NewRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RoleName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_NewTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TeamName" Type="varchar" Mode="In" />
+    <Parameter Name="ClientID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ClientID" Type="int" Mode="In" />
+    <Parameter Name="ClientName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+    <Parameter Name="RoleID" Type="int" Mode="In" />
+    <Parameter Name="ClientID" Type="int" Mode="In" />
+    <Parameter Name="ClientID2" Type="int" Mode="In" />
+    <Parameter Name="ClientID3" Type="int" Mode="In" />
+    <Parameter Name="ClientID4" Type="int" Mode="In" />
+    <Parameter Name="TeamID" Type="int" Mode="In" />
+    <Parameter Name="TypeID" Type="int" Mode="In" />
+    <Parameter Name="FirstName" Type="nchar" Mode="In" />
+    <Parameter Name="LastName" Type="nchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateEmployeeType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TypeID" Type="int" Mode="In" />
+    <Parameter Name="TypeName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ReportingID" Type="int" Mode="In" />
+    <Parameter Name="StartTime" Type="datetime" Mode="In" />
+    <Parameter Name="CompletionTime" Type="datetime" Mode="In" />
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+    <Parameter Name="Date" Type="date" Mode="In" />
+    <Parameter Name="Quantity" Type="int" Mode="In" />
+    <Parameter Name="TextScriptExecutionOrders" Type="int" Mode="In" />
+    <Parameter Name="TextScriptCreationErrors" Type="int" Mode="In" />
+    <Parameter Name="CardPoints" Type="decimal" Mode="In" />
+    <Parameter Name="TimeSpent" Type="decimal" Mode="In" />
+    <Parameter Name="HoursEstimated" Type="decimal" Mode="In" />
+    <Parameter Name="HoursComplete" Type="decimal" Mode="In" />
+    <Parameter Name="Task" Type="text" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RoleID" Type="int" Mode="In" />
+    <Parameter Name="RoleName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TeamID" Type="int" Mode="In" />
+    <Parameter Name="ClientID" Type="int" Mode="In" />
+    <Parameter Name="TeamName" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="KPIdbModelStoreContainer">
+    <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeType" EntityType="Self.EmployeeType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reporting" EntityType="Self.Reporting" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Reporting].[ReportingID] AS [ReportingID], 
+    [Reporting].[EmployeeID] AS [EmployeeID], 
+    [Reporting].[ClientID] AS [ClientID], 
+    [Reporting].[TeamID] AS [TeamID], 
+    [Reporting].[StartTime] AS [StartTime], 
+    [Reporting].[CompletionTime] AS [CompletionTime], 
+    [Reporting].[Name] AS [Name], 
+    [Reporting].[Name2] AS [Name2], 
+    [Reporting].[Date] AS [Date], 
+    [Reporting].[Quantity] AS [Quantity], 
+    [Reporting].[TextScriptExecutionOrders] AS [TextScriptExecutionOrders], 
+    [Reporting].[TextScriptCreationErrors] AS [TextScriptCreationErrors], 
+    [Reporting].[CardPoints] AS [CardPoints], 
+    [Reporting].[TimeSpent] AS [TimeSpent], 
+    [Reporting].[HoursComplete] AS [HoursComplete], 
+    [Reporting].[HoursEstimated] AS [HoursEstimated], 
+    [Reporting].[Email] AS [Email], 
+    [Reporting].[Task] AS [Task]
+    FROM [dbo].[Reporting] AS [Reporting]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK Employee FROM Client" Association="Self.FK Employee FROM Client">
+      <End EntitySet="Client" Role="Client" />
+      <End EntitySet="Employee" Role="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK Employee FROM Roles" Association="Self.FK Employee FROM Roles">
+      <End EntitySet="Roles" Role="Roles" />
+      <End EntitySet="Employee" Role="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK Employee FROM Team" Association="Self.FK Employee FROM Team">
+      <End EntitySet="Team" Role="Team" />
+      <End EntitySet="Employee" Role="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK Employee FROM Type" Association="Self.FK Employee FROM Type">
+      <End EntitySet="EmployeeType" Role="EmployeeType" />
+      <End EntitySet="Employee" Role="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK Reporting FROM Client" Association="Self.FK Reporting FROM Client">
+      <End EntitySet="Client" Role="Client" />
+      <End EntitySet="Reporting" Role="Reporting" />
+    </AssociationSet>
+    <AssociationSet Name="FK Reporting FROM Employee" Association="Self.FK Reporting FROM Employee">
+      <End EntitySet="Employee" Role="Employee" />
+      <End EntitySet="Reporting" Role="Reporting" />
+    </AssociationSet>
+    <AssociationSet Name="FK Reporting FROM Team" Association="Self.FK Reporting FROM Team">
+      <End EntitySet="Team" Role="Team" />
+      <End EntitySet="Reporting" Role="Reporting" />
+    </AssociationSet>
+    <AssociationSet Name="FK Team FROM Client" Association="Self.FK Team FROM Client">
+      <End EntitySet="Client" Role="Client" />
+      <End EntitySet="Team" Role="Team" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

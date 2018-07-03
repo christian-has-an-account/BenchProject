@@ -1,0 +1,1397 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="KPI.dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="ClientName" Nullable="false" MaxLength="50" Type="varchar" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="RoleID" Nullable="false" Type="int" />
+          <Property Name="ClientID" Type="int" />
+          <Property Name="ClientID2" Type="int" />
+          <Property Name="ClientID3" Type="int" />
+          <Property Name="ClientID4" Type="int" />
+          <Property Name="TeamID" Type="int" />
+          <Property Name="TypeID" Type="int" />
+          <Property Name="FirstName" Nullable="false" MaxLength="35" Type="nchar" />
+          <Property Name="LastName" Nullable="false" MaxLength="35" Type="nchar" />
+          <Property Name="Email" Nullable="false" Type="nvarchar(max)" />
+          <Property Name="Password" Nullable="false" MaxLength="25" Type="nvarchar" />
+        </EntityType>
+        <EntityType Name="EmployeeType">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="TypeName" Nullable="false" MaxLength="50" Type="varchar" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'KPI.db.dbo.Reporting' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Reporting">
+          <Key>
+            <PropertyRef Name="ReportingID" />
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="TeamID" />
+            <PropertyRef Name="StartTime" />
+            <PropertyRef Name="CompletionTime" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Name2" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Task" />
+          </Key>
+          <Property Name="ReportingID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="EmployeeID" Nullable="false" Type="int" />
+          <Property Name="ClientID" Nullable="false" Type="int" />
+          <Property Name="TeamID" Nullable="false" Type="int" />
+          <Property Name="StartTime" Nullable="false" Precision="0" Type="time" />
+          <Property Name="CompletionTime" Nullable="false" Precision="0" Type="time" />
+          <Property Name="Name" Nullable="false" MaxLength="35" Type="varchar" />
+          <Property Name="Name2" Nullable="false" MaxLength="35" Type="varchar" />
+          <Property Name="Date" Nullable="false" Type="date" />
+          <Property Name="Quantity" Nullable="false" Type="int" />
+          <Property Name="TextScriptExecutionOrders" Type="int" />
+          <Property Name="TextScriptCreationErrors" Type="int" />
+          <Property Name="CardPoints" Precision="2" Scale="2" Type="decimal" />
+          <Property Name="TimeSpent" Precision="2" Scale="2" Type="decimal" />
+          <Property Name="HoursComplete" Precision="2" Scale="2" Type="decimal" />
+          <Property Name="HoursEstimated" Precision="2" Scale="2" Type="decimal" />
+          <Property Name="Email" Nullable="false" MaxLength="60" Type="varchar" />
+          <Property Name="Task" Nullable="false" Type="text" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="RoleName" Nullable="false" MaxLength="35" Type="varchar" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="TeamID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="ClientID" Nullable="false" Type="int" />
+          <Property Name="TeamName" Nullable="false" MaxLength="50" Type="varchar" />
+        </EntityType>
+        <Association Name="FK Employee FROM Client">
+          <End Type="Self.Client" Multiplicity="0..1" Role="Client" />
+          <End Type="Self.Employee" Multiplicity="*" Role="Employee" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK Employee FROM Roles">
+          <End Type="Self.Roles" Multiplicity="1" Role="Roles" />
+          <End Type="Self.Employee" Multiplicity="*" Role="Employee" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK Employee FROM Team">
+          <End Type="Self.Team" Multiplicity="0..1" Role="Team" />
+          <End Type="Self.Employee" Multiplicity="*" Role="Employee" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK Employee FROM Type">
+          <End Type="Self.EmployeeType" Multiplicity="0..1" Role="EmployeeType" />
+          <End Type="Self.Employee" Multiplicity="*" Role="Employee" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeType">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK Reporting FROM Client">
+          <End Type="Self.Client" Multiplicity="1" Role="Client" />
+          <End Type="Self.Reporting" Multiplicity="*" Role="Reporting" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Reporting">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK Reporting FROM Employee">
+          <End Type="Self.Employee" Multiplicity="1" Role="Employee" />
+          <End Type="Self.Reporting" Multiplicity="*" Role="Reporting" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Reporting">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK Reporting FROM Team">
+          <End Type="Self.Team" Multiplicity="1" Role="Team" />
+          <End Type="Self.Reporting" Multiplicity="*" Role="Reporting" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="Reporting">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK Team FROM Client">
+          <End Type="Self.Client" Multiplicity="1" Role="Client" />
+          <End Type="Self.Team" Multiplicity="*" Role="Team" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_DeleteClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteReportsByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReportingID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoleID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientID" Type="int" Mode="In" />
+          <Parameter Name="TeamID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetAllClients" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetAllEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetAllEmployeeTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetAllReports" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetAllRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetAllTeams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetAllTeamsByClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetEmployeeByClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetEmployeeByEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Email" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_GetEmployeeByTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientID" Type="int" Mode="In" />
+          <Parameter Name="TeamID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetReportsByClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetReportsByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Date" Type="date" Mode="In" />
+        </Function>
+        <Function Name="sp_GetReportsByEmployeeID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmployeeID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetReportsByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_GetReportsByProxySubmission" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_GetReportsByTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TeamID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetReportsSelfSubmission" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_NewClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_NewEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoleID" Type="int" Mode="In" />
+          <Parameter Name="ClientID" Type="int" Mode="In" />
+          <Parameter Name="TeamID" Type="int" Mode="In" />
+          <Parameter Name="TypeID" Type="int" Mode="In" />
+          <Parameter Name="FirstName" Type="nchar" Mode="In" />
+          <Parameter Name="LastName" Type="nchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_NewEmployeeType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TypeName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_NewReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReportingID" Type="int" Mode="In" />
+          <Parameter Name="EmployeeID" Type="int" Mode="In" />
+          <Parameter Name="ClientID" Type="int" Mode="In" />
+          <Parameter Name="TeamID" Type="int" Mode="In" />
+          <Parameter Name="StartTime" Type="datetime" Mode="In" />
+          <Parameter Name="CompletionTime" Type="datetime" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Name2" Type="varchar" Mode="In" />
+          <Parameter Name="Date" Type="date" Mode="In" />
+          <Parameter Name="Quantity" Type="int" Mode="In" />
+          <Parameter Name="TextScriptExecutionOrders" Type="int" Mode="In" />
+          <Parameter Name="TextScriptCreationErrors" Type="int" Mode="In" />
+          <Parameter Name="CardPoints" Type="decimal" Mode="In" />
+          <Parameter Name="TimeSpent" Type="decimal" Mode="In" />
+          <Parameter Name="HoursEstimated" Type="decimal" Mode="In" />
+          <Parameter Name="HoursComplete" Type="decimal" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Task" Type="text" Mode="In" />
+        </Function>
+        <Function Name="sp_NewRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoleName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_NewTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TeamName" Type="varchar" Mode="In" />
+          <Parameter Name="ClientID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientID" Type="int" Mode="In" />
+          <Parameter Name="ClientName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmployeeID" Type="int" Mode="In" />
+          <Parameter Name="RoleID" Type="int" Mode="In" />
+          <Parameter Name="ClientID" Type="int" Mode="In" />
+          <Parameter Name="ClientID2" Type="int" Mode="In" />
+          <Parameter Name="ClientID3" Type="int" Mode="In" />
+          <Parameter Name="ClientID4" Type="int" Mode="In" />
+          <Parameter Name="TeamID" Type="int" Mode="In" />
+          <Parameter Name="TypeID" Type="int" Mode="In" />
+          <Parameter Name="FirstName" Type="nchar" Mode="In" />
+          <Parameter Name="LastName" Type="nchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateEmployeeType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TypeID" Type="int" Mode="In" />
+          <Parameter Name="TypeName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReportingID" Type="int" Mode="In" />
+          <Parameter Name="StartTime" Type="datetime" Mode="In" />
+          <Parameter Name="CompletionTime" Type="datetime" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Date" Type="date" Mode="In" />
+          <Parameter Name="Quantity" Type="int" Mode="In" />
+          <Parameter Name="TextScriptExecutionOrders" Type="int" Mode="In" />
+          <Parameter Name="TextScriptCreationErrors" Type="int" Mode="In" />
+          <Parameter Name="CardPoints" Type="decimal" Mode="In" />
+          <Parameter Name="TimeSpent" Type="decimal" Mode="In" />
+          <Parameter Name="HoursEstimated" Type="decimal" Mode="In" />
+          <Parameter Name="HoursComplete" Type="decimal" Mode="In" />
+          <Parameter Name="Task" Type="text" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoleID" Type="int" Mode="In" />
+          <Parameter Name="RoleName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TeamID" Type="int" Mode="In" />
+          <Parameter Name="ClientID" Type="int" Mode="In" />
+          <Parameter Name="TeamName" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="KPIdbModelStoreContainer">
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeType" EntityType="Self.EmployeeType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reporting" EntityType="Self.Reporting" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Reporting].[ReportingID] AS [ReportingID], 
+    [Reporting].[EmployeeID] AS [EmployeeID], 
+    [Reporting].[ClientID] AS [ClientID], 
+    [Reporting].[TeamID] AS [TeamID], 
+    [Reporting].[StartTime] AS [StartTime], 
+    [Reporting].[CompletionTime] AS [CompletionTime], 
+    [Reporting].[Name] AS [Name], 
+    [Reporting].[Name2] AS [Name2], 
+    [Reporting].[Date] AS [Date], 
+    [Reporting].[Quantity] AS [Quantity], 
+    [Reporting].[TextScriptExecutionOrders] AS [TextScriptExecutionOrders], 
+    [Reporting].[TextScriptCreationErrors] AS [TextScriptCreationErrors], 
+    [Reporting].[CardPoints] AS [CardPoints], 
+    [Reporting].[TimeSpent] AS [TimeSpent], 
+    [Reporting].[HoursComplete] AS [HoursComplete], 
+    [Reporting].[HoursEstimated] AS [HoursEstimated], 
+    [Reporting].[Email] AS [Email], 
+    [Reporting].[Task] AS [Task]
+    FROM [dbo].[Reporting] AS [Reporting]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK Employee FROM Client" Association="Self.FK Employee FROM Client">
+            <End EntitySet="Client" Role="Client" />
+            <End EntitySet="Employee" Role="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK Employee FROM Roles" Association="Self.FK Employee FROM Roles">
+            <End EntitySet="Roles" Role="Roles" />
+            <End EntitySet="Employee" Role="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK Employee FROM Team" Association="Self.FK Employee FROM Team">
+            <End EntitySet="Team" Role="Team" />
+            <End EntitySet="Employee" Role="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK Employee FROM Type" Association="Self.FK Employee FROM Type">
+            <End EntitySet="EmployeeType" Role="EmployeeType" />
+            <End EntitySet="Employee" Role="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK Reporting FROM Client" Association="Self.FK Reporting FROM Client">
+            <End EntitySet="Client" Role="Client" />
+            <End EntitySet="Reporting" Role="Reporting" />
+          </AssociationSet>
+          <AssociationSet Name="FK Reporting FROM Employee" Association="Self.FK Reporting FROM Employee">
+            <End EntitySet="Employee" Role="Employee" />
+            <End EntitySet="Reporting" Role="Reporting" />
+          </AssociationSet>
+          <AssociationSet Name="FK Reporting FROM Team" Association="Self.FK Reporting FROM Team">
+            <End EntitySet="Team" Role="Team" />
+            <End EntitySet="Reporting" Role="Reporting" />
+          </AssociationSet>
+          <AssociationSet Name="FK Team FROM Client" Association="Self.FK Team FROM Client">
+            <End EntitySet="Client" Role="Client" />
+            <End EntitySet="Team" Role="Team" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KPI.dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID2" Type="Int32" />
+          <Property Name="ClientID3" Type="Int32" />
+          <Property Name="ClientID4" Type="Int32" />
+          <Property Name="FirstName" Type="String" MaxLength="35" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="35" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="KPI.dbModel.FK_Employee_FROM_Client" FromRole="Employee" ToRole="Client" />
+          <NavigationProperty Name="Role" Relationship="KPI.dbModel.FK_Employee_FROM_Roles" FromRole="Employee" ToRole="Role" />
+          <NavigationProperty Name="Team" Relationship="KPI.dbModel.FK_Employee_FROM_Team" FromRole="Employee" ToRole="Team" />
+          <NavigationProperty Name="EmployeeType" Relationship="KPI.dbModel.FK_Employee_FROM_Type" FromRole="Employee" ToRole="EmployeeType" />
+          <NavigationProperty Name="Client2" Relationship="KPI.dbModel.FK_Employee_FROM_Client" FromRole="Employee" ToRole="Client" />
+          <NavigationProperty Name="Client3" Relationship="KPI.dbModel.FK_Employee_FROM_Client" FromRole="Employee" ToRole="Client" />
+          <NavigationProperty Name="Client4" Relationship="KPI.dbModel.FK_Employee_FROM_Client" FromRole="Employee" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="EmployeeType">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="TeamID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="KPI.dbModel.FK_Team_FROM_Client" FromRole="Team" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Reporting">
+          <Key>
+            <PropertyRef Name="ReportingID" />
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="TeamID" />
+            <PropertyRef Name="StartTime" />
+            <PropertyRef Name="CompletionTime" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Name2" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Task" />
+          </Key>
+          <Property Name="ReportingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="TeamID" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="CompletionTime" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="Name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name2" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="TextScriptExecutionOrders" Type="Int32" />
+          <Property Name="TextScriptCreationErrors" Type="Int32" />
+          <Property Name="CardPoints" Type="Decimal" Precision="2" Scale="2" />
+          <Property Name="TimeSpent" Type="Decimal" Precision="2" Scale="2" />
+          <Property Name="HoursComplete" Type="Decimal" Precision="2" Scale="2" />
+          <Property Name="HoursEstimated" Type="Decimal" Precision="2" Scale="2" />
+          <Property Name="Email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Task" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="KPI.dbModel.FK_Reporting_FROM_Client" FromRole="Reporting" ToRole="Client" />
+          <NavigationProperty Name="Employee" Relationship="KPI.dbModel.FK_Reporting_FROM_Employee" FromRole="Reporting" ToRole="Employee" />
+          <NavigationProperty Name="Team" Relationship="KPI.dbModel.FK_Reporting_FROM_Team" FromRole="Reporting" ToRole="Team" />
+        </EntityType>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="EmployeeTypes" EntityType="Self.EmployeeType" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Teams" EntityType="Self.Team" />
+          <EntitySet Name="Reportings" EntityType="Self.Reporting" />
+          <AssociationSet Name="FK_Employee_FROM_Client" Association="KPI.dbModel.FK_Employee_FROM_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reporting_FROM_Client" Association="KPI.dbModel.FK_Reporting_FROM_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Reporting" EntitySet="Reportings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_FROM_Client" Association="KPI.dbModel.FK_Team_FROM_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Team" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_FROM_Roles" Association="KPI.dbModel.FK_Employee_FROM_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_FROM_Team" Association="KPI.dbModel.FK_Employee_FROM_Team">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_FROM_Type" Association="KPI.dbModel.FK_Employee_FROM_Type">
+            <End Role="EmployeeType" EntitySet="EmployeeTypes" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reporting_FROM_Employee" Association="KPI.dbModel.FK_Reporting_FROM_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Reporting" EntitySet="Reportings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reporting_FROM_Team" Association="KPI.dbModel.FK_Reporting_FROM_Team">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="Reporting" EntitySet="Reportings" />
+          </AssociationSet>
+          <FunctionImport Name="sp_DeleteClient">
+            <Parameter Name="ClientID" Type="Int32" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteReportsByID">
+            <Parameter Name="ReportingID" Type="Int32" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteRole">
+            <Parameter Name="RoleID" Type="Int32" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteTeam">
+            <Parameter Name="ClientID" Type="Int32" Mode="In" />
+            <Parameter Name="TeamID" Type="Int32" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetAllClients" ReturnType="Collection(KPI.dbModel.sp_GetAllClients_Result)" />
+          <FunctionImport Name="sp_GetAllEmployee" ReturnType="Collection(KPI.dbModel.sp_GetAllEmployee_Result)" />
+          <FunctionImport Name="sp_GetAllEmployeeTypes" ReturnType="Collection(KPI.dbModel.sp_GetAllEmployeeTypes_Result)" />
+          <FunctionImport Name="sp_GetAllReports" ReturnType="Collection(KPI.dbModel.sp_GetAllReports_Result)" />
+          <FunctionImport Name="sp_GetAllRoles" ReturnType="Collection(KPI.dbModel.sp_GetAllRoles_Result)" />
+          <FunctionImport Name="sp_GetAllTeams" ReturnType="Collection(KPI.dbModel.sp_GetAllTeams_Result)" />
+          <FunctionImport Name="sp_GetAllTeamsByClient" ReturnType="Collection(KPI.dbModel.sp_GetAllTeamsByClient_Result)">
+            <Parameter Name="ClientID" Type="Int32" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetEmployeeByClient" ReturnType="Collection(KPI.dbModel.sp_GetEmployeeByClient_Result)">
+            <Parameter Name="ClientID" Type="Int32" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetEmployeeByEmail" ReturnType="Collection(KPI.dbModel.sp_GetEmployeeByEmail_Result)">
+            <Parameter Name="Email" Type="String" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetEmployeeByTeam" ReturnType="Collection(KPI.dbModel.sp_GetEmployeeByTeam_Result)">
+            <Parameter Name="ClientID" Type="Int32" Mode="In" />
+            <Parameter Name="TeamID" Type="Int32" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetReportsByClient" ReturnType="Collection(KPI.dbModel.sp_GetReportsByClient_Result)">
+            <Parameter Name="ClientID" Type="Int32" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetReportsByDate" ReturnType="Collection(KPI.dbModel.sp_GetReportsByDate_Result)">
+            <Parameter Name="Date" Type="DateTime" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetReportsByEmployeeID" ReturnType="Collection(KPI.dbModel.sp_GetReportsByEmployeeID_Result)">
+            <Parameter Name="EmployeeID" Type="Int32" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetReportsByName" ReturnType="Collection(KPI.dbModel.sp_GetReportsByName_Result)">
+            <Parameter Name="Name" Type="String" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetReportsByProxySubmission" ReturnType="Collection(KPI.dbModel.sp_GetReportsByProxySubmission_Result)">
+            <Parameter Name="Name" Type="String" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetReportsByTeam" ReturnType="Collection(KPI.dbModel.sp_GetReportsByTeam_Result)">
+            <Parameter Name="TeamID" Type="Int32" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetReportsSelfSubmission" ReturnType="Collection(KPI.dbModel.sp_GetReportsSelfSubmission_Result)">
+            <Parameter Name="Name" Type="String" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_NewClient">
+            <Parameter Name="ClientName" Type="String" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_NewEmployee">
+            <Parameter Name="RoleID" Type="Int32" Mode="In" />
+            <Parameter Name="ClientID" Type="Int32" Mode="In" />
+            <Parameter Name="TeamID" Type="Int32" Mode="In" />
+            <Parameter Name="TypeID" Type="Int32" Mode="In" />
+            <Parameter Name="FirstName" Type="String" Mode="In" />
+            <Parameter Name="LastName" Type="String" Mode="In" />
+            <Parameter Name="Email" Type="String" Mode="In" />
+            <Parameter Name="Password" Type="String" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_NewEmployeeType">
+            <Parameter Name="TypeName" Type="String" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_NewReport">
+            <Parameter Name="ReportingID" Type="Int32" Mode="In" />
+            <Parameter Name="EmployeeID" Type="Int32" Mode="In" />
+            <Parameter Name="ClientID" Type="Int32" Mode="In" />
+            <Parameter Name="TeamID" Type="Int32" Mode="In" />
+            <Parameter Name="StartTime" Type="DateTime" Mode="In" />
+            <Parameter Name="CompletionTime" Type="DateTime" Mode="In" />
+            <Parameter Name="Name" Type="String" Mode="In" />
+            <Parameter Name="Name2" Type="String" Mode="In" />
+            <Parameter Name="Date" Type="DateTime" Mode="In" />
+            <Parameter Name="Quantity" Type="Int32" Mode="In" />
+            <Parameter Name="TextScriptExecutionOrders" Type="Int32" Mode="In" />
+            <Parameter Name="TextScriptCreationErrors" Type="Int32" Mode="In" />
+            <Parameter Name="CardPoints" Type="Decimal" Mode="In" />
+            <Parameter Name="TimeSpent" Type="Decimal" Mode="In" />
+            <Parameter Name="HoursEstimated" Type="Decimal" Mode="In" />
+            <Parameter Name="HoursComplete" Type="Decimal" Mode="In" />
+            <Parameter Name="Email" Type="String" Mode="In" />
+            <Parameter Name="Task" Type="String" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_NewRole">
+            <Parameter Name="RoleName" Type="String" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_NewTeam">
+            <Parameter Name="TeamName" Type="String" Mode="In" />
+            <Parameter Name="ClientID" Type="Int32" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateClient">
+            <Parameter Name="ClientID" Type="Int32" Mode="In" />
+            <Parameter Name="ClientName" Type="String" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateEmployee">
+            <Parameter Name="EmployeeID" Type="Int32" Mode="In" />
+            <Parameter Name="RoleID" Type="Int32" Mode="In" />
+            <Parameter Name="ClientID" Type="Int32" Mode="In" />
+            <Parameter Name="ClientID2" Type="Int32" Mode="In" />
+            <Parameter Name="ClientID3" Type="Int32" Mode="In" />
+            <Parameter Name="ClientID4" Type="Int32" Mode="In" />
+            <Parameter Name="TeamID" Type="Int32" Mode="In" />
+            <Parameter Name="TypeID" Type="Int32" Mode="In" />
+            <Parameter Name="FirstName" Type="String" Mode="In" />
+            <Parameter Name="LastName" Type="String" Mode="In" />
+            <Parameter Name="Email" Type="String" Mode="In" />
+            <Parameter Name="Password" Type="String" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateEmployeeType">
+            <Parameter Name="TypeID" Type="Int32" Mode="In" />
+            <Parameter Name="TypeName" Type="String" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateReport">
+            <Parameter Name="ReportingID" Type="Int32" Mode="In" />
+            <Parameter Name="StartTime" Type="DateTime" Mode="In" />
+            <Parameter Name="CompletionTime" Type="DateTime" Mode="In" />
+            <Parameter Name="Name" Type="String" Mode="In" />
+            <Parameter Name="Date" Type="DateTime" Mode="In" />
+            <Parameter Name="Quantity" Type="Int32" Mode="In" />
+            <Parameter Name="TextScriptExecutionOrders" Type="Int32" Mode="In" />
+            <Parameter Name="TextScriptCreationErrors" Type="Int32" Mode="In" />
+            <Parameter Name="CardPoints" Type="Decimal" Mode="In" />
+            <Parameter Name="TimeSpent" Type="Decimal" Mode="In" />
+            <Parameter Name="HoursEstimated" Type="Decimal" Mode="In" />
+            <Parameter Name="HoursComplete" Type="Decimal" Mode="In" />
+            <Parameter Name="Task" Type="String" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateRole">
+            <Parameter Name="RoleID" Type="Int32" Mode="In" />
+            <Parameter Name="RoleName" Type="String" Mode="In" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateTeam">
+            <Parameter Name="TeamID" Type="Int32" Mode="In" />
+            <Parameter Name="ClientID" Type="Int32" Mode="In" />
+            <Parameter Name="TeamName" Type="String" Mode="In" />
+          </FunctionImport>
+        </EntityContainer>
+        <Association Name="FK_Employee_FROM_Client">
+          <End Type="KPI.dbModel.Client" Role="Client" Multiplicity="0..1" />
+          <End Type="KPI.dbModel.Employee" Role="Employee" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Reporting_FROM_Client">
+          <End Type="KPI.dbModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="KPI.dbModel.Reporting" Role="Reporting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Reporting">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_FROM_Client">
+          <End Type="KPI.dbModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="KPI.dbModel.Team" Role="Team" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Employee_FROM_Roles">
+          <End Type="KPI.dbModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="KPI.dbModel.Employee" Role="Employee" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Employee_FROM_Team">
+          <End Type="KPI.dbModel.Team" Role="Team" Multiplicity="0..1" />
+          <End Type="KPI.dbModel.Employee" Role="Employee" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Employee_FROM_Type">
+          <End Type="KPI.dbModel.EmployeeType" Role="EmployeeType" Multiplicity="0..1" />
+          <End Type="KPI.dbModel.Employee" Role="Employee" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Reporting_FROM_Employee">
+          <End Type="KPI.dbModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="KPI.dbModel.Reporting" Role="Reporting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Reporting">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reporting_FROM_Team">
+          <End Type="KPI.dbModel.Team" Role="Team" Multiplicity="1" />
+          <End Type="KPI.dbModel.Reporting" Role="Reporting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="Reporting">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_GetAllClients_Result">
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="String" Name="ClientName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_GetAllEmployee_Result">
+          <Property Type="Int32" Name="EmployeeID" Nullable="false" />
+          <Property Type="Int32" Name="RoleID" Nullable="true" />
+          <Property Type="String" Name="RoleName" Nullable="true" MaxLength="35" />
+          <Property Type="Int32" Name="ClientID" Nullable="true" />
+          <Property Type="Int32" Name="ClientID2" Nullable="true" />
+          <Property Type="Int32" Name="ClientID3" Nullable="true" />
+          <Property Type="Int32" Name="ClientID4" Nullable="true" />
+          <Property Type="String" Name="ClientName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ClientName1" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ClientName2" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ClientName3" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="TeamID" Nullable="true" />
+          <Property Type="String" Name="TeamName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="TypeID" Nullable="true" />
+          <Property Type="String" Name="TypeName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="35" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="35" />
+          <Property Type="String" Name="Email" Nullable="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="sp_GetAllEmployeeTypes_Result">
+          <Property Type="Int32" Name="TypeID" Nullable="false" />
+          <Property Type="String" Name="TypeName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_GetAllReports_Result">
+          <Property Type="Int32" Name="ReportingID" Nullable="false" />
+          <Property Type="Int32" Name="EmployeeID" Nullable="false" />
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="Int32" Name="TeamID" Nullable="false" />
+          <Property Type="Time" Name="StartTime" Nullable="false" />
+          <Property Type="Time" Name="CompletionTime" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="35" />
+          <Property Type="String" Name="Name2" Nullable="false" MaxLength="35" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Int32" Name="Quantity" Nullable="false" />
+          <Property Type="Int32" Name="TextScriptExecutionOrders" Nullable="true" />
+          <Property Type="Int32" Name="TextScriptCreationErrors" Nullable="true" />
+          <Property Type="Decimal" Name="CardPoints" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="TimeSpent" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="HoursEstimated" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="HoursComplete" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="Task" Nullable="false" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="sp_GetAllRoles_Result">
+          <Property Type="Int32" Name="RoleID" Nullable="false" />
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="35" />
+        </ComplexType>
+        <ComplexType Name="sp_GetAllTeams_Result">
+          <Property Type="Int32" Name="TeamID" Nullable="false" />
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="String" Name="TeamName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_GetAllTeamsByClient_Result">
+          <Property Type="Int32" Name="TeamID" Nullable="false" />
+          <Property Type="String" Name="TeamName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_GetEmployeeByClient_Result">
+          <Property Type="Int32" Name="EmployeeID" Nullable="false" />
+          <Property Type="Int32" Name="RoleID" Nullable="false" />
+          <Property Type="Int32" Name="ClientID" Nullable="true" />
+          <Property Type="Int32" Name="TeamID" Nullable="true" />
+          <Property Type="Int32" Name="TypeID" Nullable="true" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="35" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="35" />
+          <Property Type="String" Name="Email" Nullable="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="sp_GetEmployeeByTeam_Result">
+          <Property Type="Int32" Name="EmployeeID" Nullable="false" />
+          <Property Type="Int32" Name="RoleID" Nullable="false" />
+          <Property Type="Int32" Name="ClientID" Nullable="true" />
+          <Property Type="Int32" Name="TeamID" Nullable="true" />
+          <Property Type="Int32" Name="TypeID" Nullable="true" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="35" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="35" />
+          <Property Type="String" Name="Email" Nullable="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="sp_GetReportsByClient_Result">
+          <Property Type="Int32" Name="ReportingID" Nullable="false" />
+          <Property Type="Int32" Name="EmployeeID" Nullable="false" />
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="Int32" Name="TeamID" Nullable="false" />
+          <Property Type="Time" Name="StartTime" Nullable="false" />
+          <Property Type="Time" Name="CompletionTime" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="35" />
+          <Property Type="String" Name="Name2" Nullable="false" MaxLength="35" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Int32" Name="Quantity" Nullable="false" />
+          <Property Type="Int32" Name="TextScriptExecutionOrders" Nullable="true" />
+          <Property Type="Int32" Name="TextScriptCreationErrors" Nullable="true" />
+          <Property Type="Decimal" Name="CardPoints" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="TimeSpent" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="HoursEstimated" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="HoursComplete" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="Task" Nullable="false" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="sp_GetReportsByDate_Result">
+          <Property Type="Int32" Name="ReportingID" Nullable="false" />
+          <Property Type="Int32" Name="EmployeeID" Nullable="false" />
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="Int32" Name="TeamID" Nullable="false" />
+          <Property Type="Time" Name="StartTime" Nullable="false" />
+          <Property Type="Time" Name="CompletionTime" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="35" />
+          <Property Type="String" Name="Name2" Nullable="false" MaxLength="35" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Int32" Name="Quantity" Nullable="false" />
+          <Property Type="Int32" Name="TextScriptExecutionOrders" Nullable="true" />
+          <Property Type="Int32" Name="TextScriptCreationErrors" Nullable="true" />
+          <Property Type="Decimal" Name="CardPoints" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="TimeSpent" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="HoursEstimated" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="HoursComplete" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="Task" Nullable="false" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="sp_GetReportsByEmployeeID_Result">
+          <Property Type="Int32" Name="ReportingID" Nullable="false" />
+          <Property Type="Int32" Name="EmployeeID" Nullable="false" />
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="Int32" Name="TeamID" Nullable="false" />
+          <Property Type="Time" Name="StartTime" Nullable="false" />
+          <Property Type="Time" Name="CompletionTime" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="35" />
+          <Property Type="String" Name="Name2" Nullable="false" MaxLength="35" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Int32" Name="Quantity" Nullable="false" />
+          <Property Type="Int32" Name="TextScriptExecutionOrders" Nullable="true" />
+          <Property Type="Int32" Name="TextScriptCreationErrors" Nullable="true" />
+          <Property Type="Decimal" Name="CardPoints" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="TimeSpent" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="HoursEstimated" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="HoursComplete" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="Task" Nullable="false" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="sp_GetReportsByName_Result">
+          <Property Type="Int32" Name="ReportingID" Nullable="false" />
+          <Property Type="Int32" Name="EmployeeID" Nullable="false" />
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="Int32" Name="TeamID" Nullable="false" />
+          <Property Type="Time" Name="StartTime" Nullable="false" />
+          <Property Type="Time" Name="CompletionTime" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="35" />
+          <Property Type="String" Name="Name2" Nullable="false" MaxLength="35" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Int32" Name="Quantity" Nullable="false" />
+          <Property Type="Int32" Name="TextScriptExecutionOrders" Nullable="true" />
+          <Property Type="Int32" Name="TextScriptCreationErrors" Nullable="true" />
+          <Property Type="Decimal" Name="CardPoints" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="TimeSpent" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="HoursEstimated" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="HoursComplete" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="Task" Nullable="false" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="sp_GetReportsByProxySubmission_Result">
+          <Property Type="Int32" Name="ReportingID" Nullable="false" />
+          <Property Type="Int32" Name="EmployeeID" Nullable="false" />
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="Int32" Name="TeamID" Nullable="false" />
+          <Property Type="Time" Name="StartTime" Nullable="false" />
+          <Property Type="Time" Name="CompletionTime" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="35" />
+          <Property Type="String" Name="Name2" Nullable="false" MaxLength="35" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Int32" Name="Quantity" Nullable="false" />
+          <Property Type="Int32" Name="TextScriptExecutionOrders" Nullable="true" />
+          <Property Type="Int32" Name="TextScriptCreationErrors" Nullable="true" />
+          <Property Type="Decimal" Name="CardPoints" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="TimeSpent" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="HoursEstimated" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="HoursComplete" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="Task" Nullable="false" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="sp_GetReportsByTeam_Result">
+          <Property Type="Int32" Name="ReportingID" Nullable="false" />
+          <Property Type="Int32" Name="EmployeeID" Nullable="false" />
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="Int32" Name="TeamID" Nullable="false" />
+          <Property Type="Time" Name="StartTime" Nullable="false" />
+          <Property Type="Time" Name="CompletionTime" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="35" />
+          <Property Type="String" Name="Name2" Nullable="false" MaxLength="35" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Int32" Name="Quantity" Nullable="false" />
+          <Property Type="Int32" Name="TextScriptExecutionOrders" Nullable="true" />
+          <Property Type="Int32" Name="TextScriptCreationErrors" Nullable="true" />
+          <Property Type="Decimal" Name="CardPoints" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="TimeSpent" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="HoursEstimated" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="HoursComplete" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="Task" Nullable="false" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="sp_GetReportsSelfSubmission_Result">
+          <Property Type="Int32" Name="ReportingID" Nullable="false" />
+          <Property Type="Int32" Name="EmployeeID" Nullable="false" />
+          <Property Type="Int32" Name="ClientID" Nullable="false" />
+          <Property Type="Int32" Name="TeamID" Nullable="false" />
+          <Property Type="Time" Name="StartTime" Nullable="false" />
+          <Property Type="Time" Name="CompletionTime" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="35" />
+          <Property Type="String" Name="Name2" Nullable="false" MaxLength="35" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Int32" Name="Quantity" Nullable="false" />
+          <Property Type="Int32" Name="TextScriptExecutionOrders" Nullable="true" />
+          <Property Type="Int32" Name="TextScriptCreationErrors" Nullable="true" />
+          <Property Type="Decimal" Name="CardPoints" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="TimeSpent" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="HoursEstimated" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="Decimal" Name="HoursComplete" Nullable="true" Precision="2" Scale="2" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="Task" Nullable="false" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="sp_GetEmployeeByEmail_Result">
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="25" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KPIdbModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="KPI.dbModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="KPI.dbModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="ClientID2" ColumnName="ClientID2" />
+                <ScalarProperty Name="ClientID3" ColumnName="ClientID3" />
+                <ScalarProperty Name="ClientID4" ColumnName="ClientID4" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeTypes">
+            <EntityTypeMapping TypeName="KPI.dbModel.EmployeeType">
+              <MappingFragment StoreEntitySet="EmployeeType">
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="KPI.dbModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="KPI.dbModel.Team">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reportings">
+            <EntityTypeMapping TypeName="KPI.dbModel.Reporting">
+              <MappingFragment StoreEntitySet="Reporting">
+                <ScalarProperty Name="ReportingID" ColumnName="ReportingID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="CompletionTime" ColumnName="CompletionTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Name2" ColumnName="Name2" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="TextScriptExecutionOrders" ColumnName="TextScriptExecutionOrders" />
+                <ScalarProperty Name="TextScriptCreationErrors" ColumnName="TextScriptCreationErrors" />
+                <ScalarProperty Name="CardPoints" ColumnName="CardPoints" />
+                <ScalarProperty Name="TimeSpent" ColumnName="TimeSpent" />
+                <ScalarProperty Name="HoursComplete" ColumnName="HoursComplete" />
+                <ScalarProperty Name="HoursEstimated" ColumnName="HoursEstimated" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Task" ColumnName="Task" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_Employee_FROM_Client" TypeName="KPI.dbModel.FK_Employee_FROM_Client" StoreEntitySet="Employee">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+            </EndProperty>
+            <EndProperty Name="Client">
+              <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+            </EndProperty>
+            <Condition ColumnName="ClientID" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Team_FROM_Client" TypeName="KPI.dbModel.FK_Team_FROM_Client" StoreEntitySet="Team">
+            <EndProperty Name="Team">
+              <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+            </EndProperty>
+            <EndProperty Name="Client">
+              <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Employee_FROM_Roles" TypeName="KPI.dbModel.FK_Employee_FROM_Roles" StoreEntitySet="Employee">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+            </EndProperty>
+            <EndProperty Name="Role">
+              <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Employee_FROM_Team" TypeName="KPI.dbModel.FK_Employee_FROM_Team" StoreEntitySet="Employee">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+            </EndProperty>
+            <EndProperty Name="Team">
+              <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+            </EndProperty>
+            <Condition ColumnName="TeamID" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Employee_FROM_Type" TypeName="KPI.dbModel.FK_Employee_FROM_Type" StoreEntitySet="Employee">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+            </EndProperty>
+            <EndProperty Name="EmployeeType">
+              <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+            </EndProperty>
+            <Condition ColumnName="TypeID" IsNull="false" />
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="sp_DeleteClient" FunctionName="KPI.dbModel.Store.sp_DeleteClient" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteReportsByID" FunctionName="KPI.dbModel.Store.sp_DeleteReportsByID" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteRole" FunctionName="KPI.dbModel.Store.sp_DeleteRole" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteTeam" FunctionName="KPI.dbModel.Store.sp_DeleteTeam" />
+          <FunctionImportMapping FunctionImportName="sp_GetAllClients" FunctionName="KPI.dbModel.Store.sp_GetAllClients">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetAllClients_Result">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetAllEmployee" FunctionName="KPI.dbModel.Store.sp_GetAllEmployee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetAllEmployee_Result">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ClientID2" ColumnName="ClientID2" />
+                <ScalarProperty Name="ClientID3" ColumnName="ClientID3" />
+                <ScalarProperty Name="ClientID4" ColumnName="ClientID4" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="ClientName1" ColumnName="ClientName1" />
+                <ScalarProperty Name="ClientName2" ColumnName="ClientName2" />
+                <ScalarProperty Name="ClientName3" ColumnName="ClientName3" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetAllEmployeeTypes" FunctionName="KPI.dbModel.Store.sp_GetAllEmployeeTypes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetAllEmployeeTypes_Result">
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetAllReports" FunctionName="KPI.dbModel.Store.sp_GetAllReports">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetAllReports_Result">
+                <ScalarProperty Name="ReportingID" ColumnName="ReportingID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="CompletionTime" ColumnName="CompletionTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Name2" ColumnName="Name2" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="TextScriptExecutionOrders" ColumnName="TextScriptExecutionOrders" />
+                <ScalarProperty Name="TextScriptCreationErrors" ColumnName="TextScriptCreationErrors" />
+                <ScalarProperty Name="CardPoints" ColumnName="CardPoints" />
+                <ScalarProperty Name="TimeSpent" ColumnName="TimeSpent" />
+                <ScalarProperty Name="HoursEstimated" ColumnName="HoursEstimated" />
+                <ScalarProperty Name="HoursComplete" ColumnName="HoursComplete" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Task" ColumnName="Task" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetAllRoles" FunctionName="KPI.dbModel.Store.sp_GetAllRoles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetAllRoles_Result">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetAllTeams" FunctionName="KPI.dbModel.Store.sp_GetAllTeams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetAllTeams_Result">
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetAllTeamsByClient" FunctionName="KPI.dbModel.Store.sp_GetAllTeamsByClient">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetAllTeamsByClient_Result">
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetEmployeeByClient" FunctionName="KPI.dbModel.Store.sp_GetEmployeeByClient">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetEmployeeByClient_Result">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetEmployeeByEmail" FunctionName="KPI.dbModel.Store.sp_GetEmployeeByEmail" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetEmployeeByEmail_Result">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetEmployeeByTeam" FunctionName="KPI.dbModel.Store.sp_GetEmployeeByTeam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetEmployeeByTeam_Result">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetReportsByClient" FunctionName="KPI.dbModel.Store.sp_GetReportsByClient">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetReportsByClient_Result">
+                <ScalarProperty Name="ReportingID" ColumnName="ReportingID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="CompletionTime" ColumnName="CompletionTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Name2" ColumnName="Name2" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="TextScriptExecutionOrders" ColumnName="TextScriptExecutionOrders" />
+                <ScalarProperty Name="TextScriptCreationErrors" ColumnName="TextScriptCreationErrors" />
+                <ScalarProperty Name="CardPoints" ColumnName="CardPoints" />
+                <ScalarProperty Name="TimeSpent" ColumnName="TimeSpent" />
+                <ScalarProperty Name="HoursEstimated" ColumnName="HoursEstimated" />
+                <ScalarProperty Name="HoursComplete" ColumnName="HoursComplete" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Task" ColumnName="Task" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetReportsByDate" FunctionName="KPI.dbModel.Store.sp_GetReportsByDate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetReportsByDate_Result">
+                <ScalarProperty Name="ReportingID" ColumnName="ReportingID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="CompletionTime" ColumnName="CompletionTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Name2" ColumnName="Name2" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="TextScriptExecutionOrders" ColumnName="TextScriptExecutionOrders" />
+                <ScalarProperty Name="TextScriptCreationErrors" ColumnName="TextScriptCreationErrors" />
+                <ScalarProperty Name="CardPoints" ColumnName="CardPoints" />
+                <ScalarProperty Name="TimeSpent" ColumnName="TimeSpent" />
+                <ScalarProperty Name="HoursEstimated" ColumnName="HoursEstimated" />
+                <ScalarProperty Name="HoursComplete" ColumnName="HoursComplete" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Task" ColumnName="Task" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetReportsByEmployeeID" FunctionName="KPI.dbModel.Store.sp_GetReportsByEmployeeID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetReportsByEmployeeID_Result">
+                <ScalarProperty Name="ReportingID" ColumnName="ReportingID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="CompletionTime" ColumnName="CompletionTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Name2" ColumnName="Name2" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="TextScriptExecutionOrders" ColumnName="TextScriptExecutionOrders" />
+                <ScalarProperty Name="TextScriptCreationErrors" ColumnName="TextScriptCreationErrors" />
+                <ScalarProperty Name="CardPoints" ColumnName="CardPoints" />
+                <ScalarProperty Name="TimeSpent" ColumnName="TimeSpent" />
+                <ScalarProperty Name="HoursEstimated" ColumnName="HoursEstimated" />
+                <ScalarProperty Name="HoursComplete" ColumnName="HoursComplete" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Task" ColumnName="Task" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetReportsByName" FunctionName="KPI.dbModel.Store.sp_GetReportsByName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetReportsByName_Result">
+                <ScalarProperty Name="ReportingID" ColumnName="ReportingID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="CompletionTime" ColumnName="CompletionTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Name2" ColumnName="Name2" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="TextScriptExecutionOrders" ColumnName="TextScriptExecutionOrders" />
+                <ScalarProperty Name="TextScriptCreationErrors" ColumnName="TextScriptCreationErrors" />
+                <ScalarProperty Name="CardPoints" ColumnName="CardPoints" />
+                <ScalarProperty Name="TimeSpent" ColumnName="TimeSpent" />
+                <ScalarProperty Name="HoursEstimated" ColumnName="HoursEstimated" />
+                <ScalarProperty Name="HoursComplete" ColumnName="HoursComplete" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Task" ColumnName="Task" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetReportsByProxySubmission" FunctionName="KPI.dbModel.Store.sp_GetReportsByProxySubmission">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetReportsByProxySubmission_Result">
+                <ScalarProperty Name="ReportingID" ColumnName="ReportingID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="CompletionTime" ColumnName="CompletionTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Name2" ColumnName="Name2" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="TextScriptExecutionOrders" ColumnName="TextScriptExecutionOrders" />
+                <ScalarProperty Name="TextScriptCreationErrors" ColumnName="TextScriptCreationErrors" />
+                <ScalarProperty Name="CardPoints" ColumnName="CardPoints" />
+                <ScalarProperty Name="TimeSpent" ColumnName="TimeSpent" />
+                <ScalarProperty Name="HoursEstimated" ColumnName="HoursEstimated" />
+                <ScalarProperty Name="HoursComplete" ColumnName="HoursComplete" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Task" ColumnName="Task" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetReportsByTeam" FunctionName="KPI.dbModel.Store.sp_GetReportsByTeam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetReportsByTeam_Result">
+                <ScalarProperty Name="ReportingID" ColumnName="ReportingID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="CompletionTime" ColumnName="CompletionTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Name2" ColumnName="Name2" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="TextScriptExecutionOrders" ColumnName="TextScriptExecutionOrders" />
+                <ScalarProperty Name="TextScriptCreationErrors" ColumnName="TextScriptCreationErrors" />
+                <ScalarProperty Name="CardPoints" ColumnName="CardPoints" />
+                <ScalarProperty Name="TimeSpent" ColumnName="TimeSpent" />
+                <ScalarProperty Name="HoursEstimated" ColumnName="HoursEstimated" />
+                <ScalarProperty Name="HoursComplete" ColumnName="HoursComplete" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Task" ColumnName="Task" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetReportsSelfSubmission" FunctionName="KPI.dbModel.Store.sp_GetReportsSelfSubmission">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetReportsSelfSubmission_Result">
+                <ScalarProperty Name="ReportingID" ColumnName="ReportingID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="CompletionTime" ColumnName="CompletionTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Name2" ColumnName="Name2" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="TextScriptExecutionOrders" ColumnName="TextScriptExecutionOrders" />
+                <ScalarProperty Name="TextScriptCreationErrors" ColumnName="TextScriptCreationErrors" />
+                <ScalarProperty Name="CardPoints" ColumnName="CardPoints" />
+                <ScalarProperty Name="TimeSpent" ColumnName="TimeSpent" />
+                <ScalarProperty Name="HoursEstimated" ColumnName="HoursEstimated" />
+                <ScalarProperty Name="HoursComplete" ColumnName="HoursComplete" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Task" ColumnName="Task" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_NewClient" FunctionName="KPI.dbModel.Store.sp_NewClient" />
+          <FunctionImportMapping FunctionImportName="sp_NewEmployee" FunctionName="KPI.dbModel.Store.sp_NewEmployee" />
+          <FunctionImportMapping FunctionImportName="sp_NewEmployeeType" FunctionName="KPI.dbModel.Store.sp_NewEmployeeType" />
+          <FunctionImportMapping FunctionImportName="sp_NewReport" FunctionName="KPI.dbModel.Store.sp_NewReport" />
+          <FunctionImportMapping FunctionImportName="sp_NewRole" FunctionName="KPI.dbModel.Store.sp_NewRole" />
+          <FunctionImportMapping FunctionImportName="sp_NewTeam" FunctionName="KPI.dbModel.Store.sp_NewTeam" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateClient" FunctionName="KPI.dbModel.Store.sp_UpdateClient" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateEmployee" FunctionName="KPI.dbModel.Store.sp_UpdateEmployee" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateEmployeeType" FunctionName="KPI.dbModel.Store.sp_UpdateEmployeeType" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateReport" FunctionName="KPI.dbModel.Store.sp_UpdateReport" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateRole" FunctionName="KPI.dbModel.Store.sp_UpdateRole" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateTeam" FunctionName="KPI.dbModel.Store.sp_UpdateTeam" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

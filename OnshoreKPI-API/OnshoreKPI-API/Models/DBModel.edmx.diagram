@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="800d82566c4c4745b20aed4c242e7a50" Name="Diagram1" DisplayType="false">
+        <EntityTypeShape EntityType="KPI.dbModel.Client" Width="1.5" PointX="1.375" PointY="4.25" IsExpanded="true" FillColor="Highlight" />
+        <EntityTypeShape EntityType="KPI.dbModel.Employee" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KPI.dbModel.EmployeeType" Width="1.5" PointX="7.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="KPI.dbModel.Role" Width="1.5" PointX="5.125" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KPI.dbModel.Team" Width="1.5" PointX="3.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KPI.dbModel.Reporting" Width="1.5" PointX="9.75" PointY="4.125" IsExpanded="true" />
+        <AssociationConnector Association="KPI.dbModel.FK_Employee_FROM_Client" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="KPI.dbModel.FK_Reporting_FROM_Client" />
+        <AssociationConnector Association="KPI.dbModel.FK_Team_FROM_Client" />
+        <AssociationConnector Association="KPI.dbModel.FK_Employee_FROM_Roles" />
+        <AssociationConnector Association="KPI.dbModel.FK_Employee_FROM_Team" />
+        <AssociationConnector Association="KPI.dbModel.FK_Employee_FROM_Type" />
+        <AssociationConnector Association="KPI.dbModel.FK_Reporting_FROM_Employee" />
+        <AssociationConnector Association="KPI.dbModel.FK_Reporting_FROM_Team" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

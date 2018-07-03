@@ -19,6 +19,9 @@ namespace OnshoreKPI_API
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            var Json = config.Formatters.JsonFormatter;
+            Json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None;
         }
     }
 }

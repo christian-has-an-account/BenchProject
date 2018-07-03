@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="KPIdbModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="KPI.dbModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="KPI.dbModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="ClientID2" ColumnName="ClientID2" />
+          <ScalarProperty Name="ClientID3" ColumnName="ClientID3" />
+          <ScalarProperty Name="ClientID4" ColumnName="ClientID4" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeTypes">
+      <EntityTypeMapping TypeName="KPI.dbModel.EmployeeType">
+        <MappingFragment StoreEntitySet="EmployeeType">
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="KPI.dbModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teams">
+      <EntityTypeMapping TypeName="KPI.dbModel.Team">
+        <MappingFragment StoreEntitySet="Team">
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reportings">
+      <EntityTypeMapping TypeName="KPI.dbModel.Reporting">
+        <MappingFragment StoreEntitySet="Reporting">
+          <ScalarProperty Name="ReportingID" ColumnName="ReportingID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="CompletionTime" ColumnName="CompletionTime" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Name2" ColumnName="Name2" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="TextScriptExecutionOrders" ColumnName="TextScriptExecutionOrders" />
+          <ScalarProperty Name="TextScriptCreationErrors" ColumnName="TextScriptCreationErrors" />
+          <ScalarProperty Name="CardPoints" ColumnName="CardPoints" />
+          <ScalarProperty Name="TimeSpent" ColumnName="TimeSpent" />
+          <ScalarProperty Name="HoursComplete" ColumnName="HoursComplete" />
+          <ScalarProperty Name="HoursEstimated" ColumnName="HoursEstimated" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Task" ColumnName="Task" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_Employee_FROM_Client" TypeName="KPI.dbModel.FK_Employee_FROM_Client" StoreEntitySet="Employee">
+      <EndProperty Name="Employee">
+        <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+      </EndProperty>
+      <EndProperty Name="Client">
+        <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+      </EndProperty>
+      <Condition ColumnName="ClientID" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Team_FROM_Client" TypeName="KPI.dbModel.FK_Team_FROM_Client" StoreEntitySet="Team">
+      <EndProperty Name="Team">
+        <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+      </EndProperty>
+      <EndProperty Name="Client">
+        <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Employee_FROM_Roles" TypeName="KPI.dbModel.FK_Employee_FROM_Roles" StoreEntitySet="Employee">
+      <EndProperty Name="Employee">
+        <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+      </EndProperty>
+      <EndProperty Name="Role">
+        <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Employee_FROM_Team" TypeName="KPI.dbModel.FK_Employee_FROM_Team" StoreEntitySet="Employee">
+      <EndProperty Name="Employee">
+        <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+      </EndProperty>
+      <EndProperty Name="Team">
+        <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+      </EndProperty>
+      <Condition ColumnName="TeamID" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Employee_FROM_Type" TypeName="KPI.dbModel.FK_Employee_FROM_Type" StoreEntitySet="Employee">
+      <EndProperty Name="Employee">
+        <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+      </EndProperty>
+      <EndProperty Name="EmployeeType">
+        <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+      </EndProperty>
+      <Condition ColumnName="TypeID" IsNull="false" />
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="sp_DeleteClient" FunctionName="KPI.dbModel.Store.sp_DeleteClient" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteReportsByID" FunctionName="KPI.dbModel.Store.sp_DeleteReportsByID" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteRole" FunctionName="KPI.dbModel.Store.sp_DeleteRole" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteTeam" FunctionName="KPI.dbModel.Store.sp_DeleteTeam" />
+    <FunctionImportMapping FunctionImportName="sp_GetAllClients" FunctionName="KPI.dbModel.Store.sp_GetAllClients">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetAllClients_Result">
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetAllEmployee" FunctionName="KPI.dbModel.Store.sp_GetAllEmployee">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetAllEmployee_Result">
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="ClientID2" ColumnName="ClientID2" />
+          <ScalarProperty Name="ClientID3" ColumnName="ClientID3" />
+          <ScalarProperty Name="ClientID4" ColumnName="ClientID4" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+          <ScalarProperty Name="ClientName1" ColumnName="ClientName1" />
+          <ScalarProperty Name="ClientName2" ColumnName="ClientName2" />
+          <ScalarProperty Name="ClientName3" ColumnName="ClientName3" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetAllEmployeeTypes" FunctionName="KPI.dbModel.Store.sp_GetAllEmployeeTypes">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetAllEmployeeTypes_Result">
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetAllReports" FunctionName="KPI.dbModel.Store.sp_GetAllReports">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetAllReports_Result">
+          <ScalarProperty Name="ReportingID" ColumnName="ReportingID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="CompletionTime" ColumnName="CompletionTime" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Name2" ColumnName="Name2" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="TextScriptExecutionOrders" ColumnName="TextScriptExecutionOrders" />
+          <ScalarProperty Name="TextScriptCreationErrors" ColumnName="TextScriptCreationErrors" />
+          <ScalarProperty Name="CardPoints" ColumnName="CardPoints" />
+          <ScalarProperty Name="TimeSpent" ColumnName="TimeSpent" />
+          <ScalarProperty Name="HoursEstimated" ColumnName="HoursEstimated" />
+          <ScalarProperty Name="HoursComplete" ColumnName="HoursComplete" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Task" ColumnName="Task" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetAllRoles" FunctionName="KPI.dbModel.Store.sp_GetAllRoles">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetAllRoles_Result">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetAllTeams" FunctionName="KPI.dbModel.Store.sp_GetAllTeams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetAllTeams_Result">
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetAllTeamsByClient" FunctionName="KPI.dbModel.Store.sp_GetAllTeamsByClient">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetAllTeamsByClient_Result">
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetEmployeeByClient" FunctionName="KPI.dbModel.Store.sp_GetEmployeeByClient">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetEmployeeByClient_Result">
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetEmployeeByEmail" FunctionName="KPI.dbModel.Store.sp_GetEmployeeByEmail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetEmployeeByEmail_Result">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetEmployeeByTeam" FunctionName="KPI.dbModel.Store.sp_GetEmployeeByTeam">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetEmployeeByTeam_Result">
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetReportsByClient" FunctionName="KPI.dbModel.Store.sp_GetReportsByClient">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetReportsByClient_Result">
+          <ScalarProperty Name="ReportingID" ColumnName="ReportingID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="CompletionTime" ColumnName="CompletionTime" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Name2" ColumnName="Name2" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="TextScriptExecutionOrders" ColumnName="TextScriptExecutionOrders" />
+          <ScalarProperty Name="TextScriptCreationErrors" ColumnName="TextScriptCreationErrors" />
+          <ScalarProperty Name="CardPoints" ColumnName="CardPoints" />
+          <ScalarProperty Name="TimeSpent" ColumnName="TimeSpent" />
+          <ScalarProperty Name="HoursEstimated" ColumnName="HoursEstimated" />
+          <ScalarProperty Name="HoursComplete" ColumnName="HoursComplete" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Task" ColumnName="Task" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetReportsByDate" FunctionName="KPI.dbModel.Store.sp_GetReportsByDate">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetReportsByDate_Result">
+          <ScalarProperty Name="ReportingID" ColumnName="ReportingID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="CompletionTime" ColumnName="CompletionTime" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Name2" ColumnName="Name2" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="TextScriptExecutionOrders" ColumnName="TextScriptExecutionOrders" />
+          <ScalarProperty Name="TextScriptCreationErrors" ColumnName="TextScriptCreationErrors" />
+          <ScalarProperty Name="CardPoints" ColumnName="CardPoints" />
+          <ScalarProperty Name="TimeSpent" ColumnName="TimeSpent" />
+          <ScalarProperty Name="HoursEstimated" ColumnName="HoursEstimated" />
+          <ScalarProperty Name="HoursComplete" ColumnName="HoursComplete" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Task" ColumnName="Task" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetReportsByEmployeeID" FunctionName="KPI.dbModel.Store.sp_GetReportsByEmployeeID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetReportsByEmployeeID_Result">
+          <ScalarProperty Name="ReportingID" ColumnName="ReportingID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="CompletionTime" ColumnName="CompletionTime" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Name2" ColumnName="Name2" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="TextScriptExecutionOrders" ColumnName="TextScriptExecutionOrders" />
+          <ScalarProperty Name="TextScriptCreationErrors" ColumnName="TextScriptCreationErrors" />
+          <ScalarProperty Name="CardPoints" ColumnName="CardPoints" />
+          <ScalarProperty Name="TimeSpent" ColumnName="TimeSpent" />
+          <ScalarProperty Name="HoursEstimated" ColumnName="HoursEstimated" />
+          <ScalarProperty Name="HoursComplete" ColumnName="HoursComplete" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Task" ColumnName="Task" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetReportsByName" FunctionName="KPI.dbModel.Store.sp_GetReportsByName">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetReportsByName_Result">
+          <ScalarProperty Name="ReportingID" ColumnName="ReportingID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="CompletionTime" ColumnName="CompletionTime" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Name2" ColumnName="Name2" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="TextScriptExecutionOrders" ColumnName="TextScriptExecutionOrders" />
+          <ScalarProperty Name="TextScriptCreationErrors" ColumnName="TextScriptCreationErrors" />
+          <ScalarProperty Name="CardPoints" ColumnName="CardPoints" />
+          <ScalarProperty Name="TimeSpent" ColumnName="TimeSpent" />
+          <ScalarProperty Name="HoursEstimated" ColumnName="HoursEstimated" />
+          <ScalarProperty Name="HoursComplete" ColumnName="HoursComplete" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Task" ColumnName="Task" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetReportsByProxySubmission" FunctionName="KPI.dbModel.Store.sp_GetReportsByProxySubmission">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetReportsByProxySubmission_Result">
+          <ScalarProperty Name="ReportingID" ColumnName="ReportingID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="CompletionTime" ColumnName="CompletionTime" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Name2" ColumnName="Name2" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="TextScriptExecutionOrders" ColumnName="TextScriptExecutionOrders" />
+          <ScalarProperty Name="TextScriptCreationErrors" ColumnName="TextScriptCreationErrors" />
+          <ScalarProperty Name="CardPoints" ColumnName="CardPoints" />
+          <ScalarProperty Name="TimeSpent" ColumnName="TimeSpent" />
+          <ScalarProperty Name="HoursEstimated" ColumnName="HoursEstimated" />
+          <ScalarProperty Name="HoursComplete" ColumnName="HoursComplete" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Task" ColumnName="Task" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetReportsByTeam" FunctionName="KPI.dbModel.Store.sp_GetReportsByTeam">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetReportsByTeam_Result">
+          <ScalarProperty Name="ReportingID" ColumnName="ReportingID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="CompletionTime" ColumnName="CompletionTime" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Name2" ColumnName="Name2" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="TextScriptExecutionOrders" ColumnName="TextScriptExecutionOrders" />
+          <ScalarProperty Name="TextScriptCreationErrors" ColumnName="TextScriptCreationErrors" />
+          <ScalarProperty Name="CardPoints" ColumnName="CardPoints" />
+          <ScalarProperty Name="TimeSpent" ColumnName="TimeSpent" />
+          <ScalarProperty Name="HoursEstimated" ColumnName="HoursEstimated" />
+          <ScalarProperty Name="HoursComplete" ColumnName="HoursComplete" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Task" ColumnName="Task" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetReportsSelfSubmission" FunctionName="KPI.dbModel.Store.sp_GetReportsSelfSubmission">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="KPI.dbModel.sp_GetReportsSelfSubmission_Result">
+          <ScalarProperty Name="ReportingID" ColumnName="ReportingID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="CompletionTime" ColumnName="CompletionTime" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Name2" ColumnName="Name2" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="TextScriptExecutionOrders" ColumnName="TextScriptExecutionOrders" />
+          <ScalarProperty Name="TextScriptCreationErrors" ColumnName="TextScriptCreationErrors" />
+          <ScalarProperty Name="CardPoints" ColumnName="CardPoints" />
+          <ScalarProperty Name="TimeSpent" ColumnName="TimeSpent" />
+          <ScalarProperty Name="HoursEstimated" ColumnName="HoursEstimated" />
+          <ScalarProperty Name="HoursComplete" ColumnName="HoursComplete" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Task" ColumnName="Task" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_NewClient" FunctionName="KPI.dbModel.Store.sp_NewClient" />
+    <FunctionImportMapping FunctionImportName="sp_NewEmployee" FunctionName="KPI.dbModel.Store.sp_NewEmployee" />
+    <FunctionImportMapping FunctionImportName="sp_NewEmployeeType" FunctionName="KPI.dbModel.Store.sp_NewEmployeeType" />
+    <FunctionImportMapping FunctionImportName="sp_NewReport" FunctionName="KPI.dbModel.Store.sp_NewReport" />
+    <FunctionImportMapping FunctionImportName="sp_NewRole" FunctionName="KPI.dbModel.Store.sp_NewRole" />
+    <FunctionImportMapping FunctionImportName="sp_NewTeam" FunctionName="KPI.dbModel.Store.sp_NewTeam" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateClient" FunctionName="KPI.dbModel.Store.sp_UpdateClient" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateEmployee" FunctionName="KPI.dbModel.Store.sp_UpdateEmployee" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateEmployeeType" FunctionName="KPI.dbModel.Store.sp_UpdateEmployeeType" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateReport" FunctionName="KPI.dbModel.Store.sp_UpdateReport" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateRole" FunctionName="KPI.dbModel.Store.sp_UpdateRole" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateTeam" FunctionName="KPI.dbModel.Store.sp_UpdateTeam" />
+  </EntityContainerMapping>
+</Mapping>
