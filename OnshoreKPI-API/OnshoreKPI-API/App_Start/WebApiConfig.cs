@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
+
 namespace OnshoreKPI_API
 {
     public static class WebApiConfig
@@ -20,6 +21,9 @@ namespace OnshoreKPI_API
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            //Institutes AutoMapper
+
 
 
             //Formats returning data in JSON format

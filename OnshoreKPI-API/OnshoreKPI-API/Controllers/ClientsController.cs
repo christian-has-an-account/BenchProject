@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -34,6 +35,32 @@ namespace OnshoreKPI_API.Controllers
             }
 
             return Ok(client);
+        }
+
+        public IQueryable GetTeamsByClient(int id)
+        {
+            var Teams = "";
+            try
+            {
+                using (SqlConnection connect = new SqlConnection(db))
+                {
+                    using (SqlCommand _command = new SqlCommand("sp_GetTeamsByClient", connect))
+                    {
+                        _command.CommandType = CommandType.StoredProcedure;
+                        _command.Parameters.AddWithValue("ClientID", id);
+                        connect.OpenAsync();
+                        using (SqlDataReader _reader = _command.ExecuteReader())
+                        {
+                            Teams = _reader.Read();
+                        }
+                    }
+                }
+            }
+            finally
+            {
+            }
+                return Teams;
+
         }
 
         // PUT: api/Clients/5
