@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -20,8 +21,18 @@ namespace OnshoreKPI_API
                 defaults: new { id = RouteParameter.Optional }
             );
 
+
+            //Formats returning data in JSON format
             var Json = config.Formatters.JsonFormatter;
             Json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None;
+
+            //Formats JSON Response data for Readability
+            config.Formatters.JsonFormatter.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+            // diplays JSON filenames in camel case
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+            //Disables XML format for response
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
         }
     }
 }
