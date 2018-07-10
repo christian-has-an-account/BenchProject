@@ -18,13 +18,9 @@ namespace OnshoreKPI_API
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                routeTemplate: "api/{controller}/{id}/{Controller}",
+                defaults: new { id = RouteParameter.Optional, Controller = RouteParameter.Optional }
             );
-
-            //Institutes AutoMapper
-
-
 
             //Formats returning data in JSON format
             var Json = config.Formatters.JsonFormatter;

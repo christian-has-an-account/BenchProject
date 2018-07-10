@@ -37,31 +37,21 @@ namespace OnshoreKPI_API.Controllers
             return Ok(client);
         }
 
-        public IQueryable GetTeamsByClient(int id)
-        {
-            var Teams = "";
-            try
-            {
-                using (SqlConnection connect = new SqlConnection(db))
-                {
-                    using (SqlCommand _command = new SqlCommand("sp_GetTeamsByClient", connect))
-                    {
-                        _command.CommandType = CommandType.StoredProcedure;
-                        _command.Parameters.AddWithValue("ClientID", id);
-                        connect.OpenAsync();
-                        using (SqlDataReader _reader = _command.ExecuteReader())
-                        {
-                            Teams = _reader.Read();
-                        }
-                    }
-                }
-            }
-            finally
-            {
-            }
-                return Teams;
+        ////GET: Get Employees On Client by ClientID
+        //[HttpGet]
+        //[ResponseType(typeof(Employee))]
+        //[Route("~/api/Clients/{id}/{subaction}")]
+        //public IHttpActionResult GetEmployeeByClientID(int CID)
+        //{
+        //    var user = db.sp_GetEmployeeByClient(CID);
 
-        }
+        //    if (user == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    user += subaction = "Employees";
+        //    return Ok(user);
+        //}
 
         // PUT: api/Clients/5
         [ResponseType(typeof(void))]

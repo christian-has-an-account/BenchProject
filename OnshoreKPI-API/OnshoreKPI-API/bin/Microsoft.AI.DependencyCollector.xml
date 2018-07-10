@@ -599,6 +599,36 @@
             and MemoryCache leaks memory. It should be fixed sometime AFTER .NET 4.7.1.
             </summary>
         </member>
+        <member name="T:Microsoft.ApplicationInsights.DependencyCollector.Implementation.SqlClientDiagnostics.SqlClientDiagnosticFetcherTypes.CommandBefore">
+            <summary> Fetchers for execute command before event. </summary>
+        </member>
+        <member name="T:Microsoft.ApplicationInsights.DependencyCollector.Implementation.SqlClientDiagnostics.SqlClientDiagnosticFetcherTypes.CommandAfter">
+            <summary> Fetchers for execute command after event. </summary>
+        </member>
+        <member name="T:Microsoft.ApplicationInsights.DependencyCollector.Implementation.SqlClientDiagnostics.SqlClientDiagnosticFetcherTypes.CommandError">
+            <summary> Fetchers for execute command error event. </summary>
+        </member>
+        <member name="T:Microsoft.ApplicationInsights.DependencyCollector.Implementation.SqlClientDiagnostics.SqlClientDiagnosticFetcherTypes.ConnectionBefore">
+            <summary> Fetchers for connection open/close before events. </summary>
+        </member>
+        <member name="T:Microsoft.ApplicationInsights.DependencyCollector.Implementation.SqlClientDiagnostics.SqlClientDiagnosticFetcherTypes.ConnectionAfter">
+            <summary> Fetchers for connection open/close after events. </summary>
+        </member>
+        <member name="T:Microsoft.ApplicationInsights.DependencyCollector.Implementation.SqlClientDiagnostics.SqlClientDiagnosticFetcherTypes.ConnectionError">
+            <summary> Fetchers for connection open/close error events. </summary>
+        </member>
+        <member name="T:Microsoft.ApplicationInsights.DependencyCollector.Implementation.SqlClientDiagnostics.SqlClientDiagnosticFetcherTypes.TransactionCommitBefore">
+            <summary> Fetchers for transaction commit/rollback before events. </summary>
+        </member>
+        <member name="T:Microsoft.ApplicationInsights.DependencyCollector.Implementation.SqlClientDiagnostics.SqlClientDiagnosticFetcherTypes.TransactionRollbackBefore">
+            <summary> Fetchers for transaction commit before events. </summary>
+        </member>
+        <member name="T:Microsoft.ApplicationInsights.DependencyCollector.Implementation.SqlClientDiagnostics.SqlClientDiagnosticFetcherTypes.TransactionAfter">
+            <summary> Fetchers for transaction commit/rollback after events. </summary>
+        </member>
+        <member name="T:Microsoft.ApplicationInsights.DependencyCollector.Implementation.SqlClientDiagnostics.SqlClientDiagnosticFetcherTypes.TransactionError">
+            <summary> Fetchers for transaction commit/rollback error events. </summary>
+        </member>
         <member name="T:Microsoft.ApplicationInsights.DependencyCollector.Implementation.PropertyFetcher">
             <summary>
             Efficient implementation of fetching properties of anonymous types with reflection.
@@ -907,7 +937,7 @@
             received from Profiler instrumentation for HTTP or HTTP EventSource/DiagnosticSource events.   
             </summary>
         </member>
-        <member name="M:Microsoft.ApplicationInsights.DependencyCollector.Implementation.HttpProcessing.#ctor(Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration,System.String,System.String,System.Boolean,System.Collections.Generic.ICollection{System.String},System.String)">
+        <member name="M:Microsoft.ApplicationInsights.DependencyCollector.Implementation.HttpProcessing.#ctor(Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration,System.String,System.String,System.Boolean,System.Collections.Generic.ICollection{System.String})">
             <summary>
             Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.DependencyCollector.Implementation.HttpProcessing"/> class.
             </summary>
@@ -919,12 +949,6 @@
             <param name="webRequest">Represents web request.</param>
             <returns>The url if possible otherwise empty string.</returns>
         </member>
-        <member name="M:Microsoft.ApplicationInsights.DependencyCollector.Implementation.HttpProcessing.OverrideCorrelationIdLookupHelper(Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper)">
-            <summary>
-            Simple test hook, that allows for using a stub rather than the implementation that calls the original service.
-            </summary>
-            <param name="correlationIdLookupHelper">Lookup header to use.</param>
-        </member>
         <member name="M:Microsoft.ApplicationInsights.DependencyCollector.Implementation.HttpProcessing.OnBegin(System.Object,System.Boolean)">
             <summary>
             Common helper for all Begin Callbacks.
@@ -934,13 +958,27 @@
             Should be set to true only for profiler and old versions of DiagnosticSource Http hook events.</param>
             <returns>Null object as all context is maintained in this class via weak tables.</returns>
         </member>
-        <member name="M:Microsoft.ApplicationInsights.DependencyCollector.Implementation.HttpProcessing.OnEnd(System.Object,System.Object,System.Object)">
+        <member name="M:Microsoft.ApplicationInsights.DependencyCollector.Implementation.HttpProcessing.OnEndResponse(System.Object,System.Object)">
+            <summary>
+            Common helper for all End Callbacks.
+            </summary>        
+            <param name="request">The HttpWebRequest instance.</param>
+            <param name="response">The HttpWebResponse instance.</param>                
+        </member>
+        <member name="M:Microsoft.ApplicationInsights.DependencyCollector.Implementation.HttpProcessing.OnEndException(System.Object,System.Object)">
             <summary>
             Common helper for all End Callbacks.
             </summary>        
             <param name="exception">The exception object if any.</param>
-            <param name="thisObj">This object.</param>                
-            <param name="returnValue">Return value of the function if any.</param>
+            <param name="request">HttpWebRequest instance.</param>                
+        </member>
+        <member name="M:Microsoft.ApplicationInsights.DependencyCollector.Implementation.HttpProcessing.OnEndResponse(System.Object,System.Object,System.Object)">
+            <summary>
+            Common helper for all End Callbacks.
+            </summary>        
+            <param name="request">WebRequest object.</param>
+            <param name="statusCode">HttpStatusCode from response.</param>                
+            <param name="responseHeaders">Response headers.</param>
         </member>
         <member name="M:Microsoft.ApplicationInsights.DependencyCollector.Implementation.HttpProcessing.AddTupleForWebDependencies(System.Net.WebRequest,Microsoft.ApplicationInsights.DataContracts.DependencyTelemetry,System.Boolean)">
             <summary>
@@ -969,7 +1007,7 @@
             received from Profiler instrumentation for HTTP .   
             </summary>
         </member>
-        <member name="M:Microsoft.ApplicationInsights.DependencyCollector.Implementation.ProfilerHttpProcessing.#ctor(Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration,System.String,Microsoft.ApplicationInsights.DependencyCollector.Implementation.Operation.ObjectInstanceBasedOperationHolder,System.Boolean,System.Collections.Generic.ICollection{System.String},System.String)">
+        <member name="M:Microsoft.ApplicationInsights.DependencyCollector.Implementation.ProfilerHttpProcessing.#ctor(Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration,System.String,Microsoft.ApplicationInsights.DependencyCollector.Implementation.Operation.ObjectInstanceBasedOperationHolder,System.Boolean,System.Collections.Generic.ICollection{System.String})">
             <summary>
             Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.DependencyCollector.Implementation.ProfilerHttpProcessing"/> class.
             </summary>
@@ -1402,117 +1440,6 @@
             Check if a key exists before adding the key/value pair.
             </summary>
         </member>
-        <member name="T:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper">
-            <summary>
-            A store for instrumentation App Ids. This makes sure we don't query the public endpoint to find an app Id for the same instrumentation key more than once.
-            </summary>
-        </member>
-        <member name="F:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper.MAXSIZE">
-            <summary>
-            Max number of app ids to cache.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper.#ctor(System.Func{System.String,System.Threading.Tasks.Task{System.String}})">
-            <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper" /> class mostly to be used by the test classes to provide an override for fetching appId logic.
-            </summary>
-            <param name="appIdProviderMethod">The delegate to be called to fetch the appId.</param>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper.#ctor(System.Collections.Generic.Dictionary{System.String,System.String})">
-            <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper" /> class mostly to be used by the test classes to seed the instrumentation key -> app Id relationship.
-            </summary>
-            <param name="mapSeed">A dictionary that contains known instrumentation key - app id relationship.</param>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper" /> class.
-            </summary>
-            <param name="endpointAddress">Endpoint that is to be used to fetch appId.</param>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper.TryGetXComponentCorrelationId(System.String,System.String@)">
-            <summary>
-            Retrieves the correlation id corresponding to a given instrumentation key.
-            </summary>
-            <param name="instrumentationKey">Instrumentation key string.</param>
-            <param name="correlationId">AppId corresponding to the provided instrumentation key.</param>
-            <returns>true if correlationId was successfully retrieved; false otherwise.</returns>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper.IsFetchAppInProgress(System.String)">
-            <summary>
-            This method is purely a test helper at this point. It checks whether the task to get app ID is still running.
-            </summary>
-            <returns>True if fetch task is still in progress, false otherwise.</returns>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper.GenerateCorrelationIdAndAddToDictionary(System.String,System.String)">
-            <summary>
-            Format and store an iKey and appId pair into the dictionary of known correlation ids.
-            </summary>
-            <param name="ikey">Instrumentation Key is expected to be a Guid string.</param>
-            <param name="appId">Application Id is expected to be a Guid string. App Id needs to be Http Header safe, and all non-ASCII characters will be removed.</param>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper.FetchAppIdFromService(System.String)">
-            <summary>
-            Retrieves the app id given the instrumentation key.
-            </summary>
-            <param name="instrumentationKey">Instrumentation key for which app id is to be retrieved.</param>
-            <returns>App id.</returns>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper.GetAppIdEndPointUri(System.String)">
-            <summary>
-            Strips off any relative path at the end of the base URI and then appends the known relative path to get the app id uri.
-            </summary>
-            <param name="instrumentationKey">AI resource's instrumentation key.</param>
-            <returns>Computed Uri.</returns>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper.RegisterFailure(System.String,System.Exception)">
-            <summary>
-            Registers failure for further action in future.
-            </summary>
-            <param name="instrumentationKey">Instrumentation key for which the failure occurred.</param>
-            <param name="ex">Exception indicating failure.</param>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper.RegisterFetchFailure(System.String,System.Net.HttpStatusCode)">
-            <summary>
-            FetchAppIdFromService failed.
-            Registers failure for further action in future.
-            </summary>
-            <param name="instrumentationKey">Instrumentation key for which the failure occurred.</param>
-            <param name="httpStatusCode">Response code from AppId Endpoint.</param>
-        </member>
-        <member name="T:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper.FailedResult">
-            <summary>
-            Structure that represents a failed fetch app Id call.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper.FailedResult.#ctor(System.DateTime,System.Net.HttpStatusCode)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper.FailedResult" /> class.
-            </summary>
-            <param name="failureTime">Time when the failure occurred.</param>
-            <param name="failureCode">Failure response code.</param>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper.FailedResult.#ctor(System.DateTime)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper.FailedResult" /> class.
-            </summary>
-            <param name="failureTime">Time when the failure occurred.</param>
-        </member>
-        <member name="P:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper.FailedResult.FailureTime">
-            <summary>
-            Gets the time of failure.
-            </summary>
-        </member>
-        <member name="P:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper.FailedResult.FailureCode">
-            <summary>
-            Gets the integer value for response code representing the type of failure.
-            </summary>
-        </member>
-        <member name="P:Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper.FailedResult.ShouldRetry">
-            <summary>
-            Gets a value indicating whether the failure is likely to go away when a retry happens.
-            </summary>
-        </member>
         <member name="T:Microsoft.ApplicationInsights.Common.ExceptionUtilities">
             <summary>
             Utility functions for dealing with exceptions.
@@ -1557,18 +1484,22 @@
             Remove all other characters.
             </summary>
         </member>
-        <member name="T:Microsoft.ApplicationInsights.Common.ICorrelationIdLookupHelper">
+        <member name="T:Microsoft.ApplicationInsights.Common.InjectionGuardConstants">
             <summary>
-            An interface for getting a correlation id from a provided instrumentation key.
+            These values are listed to guard against malicious injections by limiting the max size allowed in an HTTP Response.
+            These max limits are intentionally exaggerated to allow for unexpected responses, while still guarding against unreasonably large responses.
+            Example: While a 32 character response may be expected, 50 characters may be permitted while a 10,000 character response would be unreasonable and malicious.
             </summary>
         </member>
-        <member name="M:Microsoft.ApplicationInsights.Common.ICorrelationIdLookupHelper.TryGetXComponentCorrelationId(System.String,System.String@)">
+        <member name="F:Microsoft.ApplicationInsights.Common.InjectionGuardConstants.AppIdMaxLengeth">
             <summary>
-            Retrieves the correlation id corresponding to a given instrumentation key.
+            Max length of AppId allowed in response from Breeze.
             </summary>
-            <param name="instrumentationKey">Instrumentation key string.</param>
-            <param name="correlationId">AppId corresponding to the provided instrumentation key.</param>
-            <returns>true if correlationId was successfully retrieved; false otherwise.</returns>
+        </member>
+        <member name="F:Microsoft.ApplicationInsights.Common.InjectionGuardConstants.RequestHeaderMaxLength">
+            <summary>
+            Max length of incoming Request Header value allowed.
+            </summary>
         </member>
         <member name="T:Microsoft.ApplicationInsights.Common.RequestResponseHeaders">
             <summary>
@@ -1590,16 +1521,6 @@
             Target key in the request context header that is added to the response and retrieved by the calling application when processing incoming responses.
             </summary>
         </member>
-        <member name="F:Microsoft.ApplicationInsights.Common.RequestResponseHeaders.RequestContextSourceRoleNameKey">
-            <summary>
-            Source-RoleName key in the request context header that is added by an application while making http requests and retrieved by the other application when processing incoming requests.
-            </summary>
-        </member>
-        <member name="F:Microsoft.ApplicationInsights.Common.RequestResponseHeaders.RequestContextTargetRoleNameKey">
-            <summary>
-            Target-RoleName key in the request context header that is added to the response and retrieved by the calling application when processing incoming responses.
-            </summary>
-        </member>
         <member name="F:Microsoft.ApplicationInsights.Common.RequestResponseHeaders.StandardParentIdHeader">
             <summary>
             Legacy parent Id header.
@@ -1618,6 +1539,22 @@
         <member name="F:Microsoft.ApplicationInsights.Common.RequestResponseHeaders.CorrelationContextHeader">
             <summary>
             Standard Correlation-Context header.
+            </summary>
+        </member>
+        <member name="F:Microsoft.ApplicationInsights.Common.RequestResponseHeaders.AccessControlExposeHeadersHeader">
+            <summary>
+            Access-Control-Expose-Headers header indicates which headers can be exposed as part of the response by listing their names.
+            Should contain Request-Context value that will allow reading Request-Context in JavaScript SDK on Browser side.
+            </summary>
+        </member>
+        <member name="T:Microsoft.ApplicationInsights.Common.StringUtilities">
+            <summary>
+            Generic functions to perform common operations on a string.
+            </summary>
+        </member>
+        <member name="M:Microsoft.ApplicationInsights.Common.StringUtilities.EnforceMaxLength(System.String,System.Int32)">
+            <summary>
+            Check a strings length and trim to a max length if needed.
             </summary>
         </member>
         <member name="T:Microsoft.ApplicationInsights.Common.WebHeaderCollectionExtensions">
