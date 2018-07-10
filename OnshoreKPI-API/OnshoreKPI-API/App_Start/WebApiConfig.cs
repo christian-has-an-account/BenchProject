@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
+
 namespace OnshoreKPI_API
 {
     public static class WebApiConfig
@@ -17,10 +18,9 @@ namespace OnshoreKPI_API
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                routeTemplate: "api/{controller}/{id}/{Controller}",
+                defaults: new { id = RouteParameter.Optional, Controller = RouteParameter.Optional }
             );
-
 
             //Formats returning data in JSON format
             var Json = config.Formatters.JsonFormatter;

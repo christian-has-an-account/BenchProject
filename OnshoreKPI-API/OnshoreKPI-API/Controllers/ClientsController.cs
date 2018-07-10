@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -35,6 +36,22 @@ namespace OnshoreKPI_API.Controllers
 
             return Ok(client);
         }
+
+        ////GET: Get Employees On Client by ClientID
+        //[HttpGet]
+        //[ResponseType(typeof(Employee))]
+        //[Route("~/api/Clients/{id}/{subaction}")]
+        //public IHttpActionResult GetEmployeeByClientID(int CID)
+        //{
+        //    var user = db.sp_GetEmployeeByClient(CID);
+
+        //    if (user == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    user += subaction = "Employees";
+        //    return Ok(user);
+        //}
 
         // PUT: api/Clients/5
         [ResponseType(typeof(void))]
