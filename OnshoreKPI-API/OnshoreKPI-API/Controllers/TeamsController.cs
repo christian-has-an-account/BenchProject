@@ -87,21 +87,21 @@ namespace OnshoreKPI_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = team.TeamID }, team);
         }
 
-        // DELETE: api/Teams/5
-        [ResponseType(typeof(Team))]
-        public async Task<IHttpActionResult> DeleteTeam(int id)
-        {
-            Team team = await db.Teams.FindAsync(id);
-            if (team == null)
-            {
-                return NotFound();
-            }
+        //// DELETE: api/Teams/5
+        //[ResponseType(typeof(Team))]
+        //public async Task<IHttpActionResult> DeleteTeam(int id)
+        //{
+        //    Team team = await db.Teams.FindAsync(id);
+        //    if (team == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            db.Teams.Remove(team);
-            await db.SaveChangesAsync();
+        //    db.Teams.Remove(team);
+        //    await db.SaveChangesAsync();
 
-            return Ok(team);
-        }
+        //    return Ok(team);
+        //}
 
         protected override void Dispose(bool disposing)
         {

@@ -37,22 +37,6 @@ namespace OnshoreKPI_API.Controllers
             return Ok(client);
         }
 
-        ////GET: Get Employees On Client by ClientID
-        //[HttpGet]
-        //[ResponseType(typeof(Employee))]
-        //[Route("~/api/Clients/{id}/{subaction}")]
-        //public IHttpActionResult GetEmployeeByClientID(int CID)
-        //{
-        //    var user = db.sp_GetEmployeeByClient(CID);
-
-        //    if (user == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    user += subaction = "Employees";
-        //    return Ok(user);
-        //}
-
         // PUT: api/Clients/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutClient(int id, Client client)
@@ -103,21 +87,21 @@ namespace OnshoreKPI_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = client.ClientID }, client);
         }
 
-        // DELETE: api/Clients/5
-        [ResponseType(typeof(Client))]
-        public async Task<IHttpActionResult> DeleteClient(int id)
-        {
-            Client client = await db.Clients.FindAsync(id);
-            if (client == null)
-            {
-                return NotFound();
-            }
+        //// DELETE: api/Clients/5
+        //[ResponseType(typeof(Client))]
+        //public async Task<IHttpActionResult> DeleteClient(int id)
+        //{
+        //    Client client = await db.Clients.FindAsync(id);
+        //    if (client == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            db.Clients.Remove(client);
-            await db.SaveChangesAsync();
+        //    db.Clients.Remove(client);
+        //    await db.SaveChangesAsync();
 
-            return Ok(client);
-        }
+        //    return Ok(client);
+        //}
 
         protected override void Dispose(bool disposing)
         {

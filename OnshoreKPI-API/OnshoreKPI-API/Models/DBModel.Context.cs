@@ -526,5 +526,18 @@ namespace OnshoreKPI_API.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateTeam", teamIDParameter, clientIDParameter, teamNameParameter);
         }
+    
+        public virtual ObjectResult<sp_GetReportByDateandEmployee_Result> sp_GetReportByDateandEmployee(Nullable<int> employeeID, Nullable<System.DateTime> date)
+        {
+            var employeeIDParameter = employeeID.HasValue ?
+                new ObjectParameter("EmployeeID", employeeID) :
+                new ObjectParameter("EmployeeID", typeof(int));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetReportByDateandEmployee_Result>("sp_GetReportByDateandEmployee", employeeIDParameter, dateParameter);
+        }
     }
 }

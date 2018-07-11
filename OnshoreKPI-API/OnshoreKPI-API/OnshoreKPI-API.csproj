@@ -272,6 +272,9 @@
     <Compile Include="Models\sp_GetEmployeeByTeam_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_GetReportByDateandEmployee_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_GetReportsByClient_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
