@@ -13,7 +13,6 @@ namespace OnshoreKPI_API.Models
     
     public partial class sp_GetEmployeeByEmail_Result
     {
-        public string Email { get; set; }
         public string Password { get; set; }
     }
 }
