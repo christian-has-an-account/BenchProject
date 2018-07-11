@@ -39,7 +39,6 @@ namespace OnshoreKPI_API.Controllers
         //GET: Get Employees On Client by ClientID
         [HttpGet]
         [ResponseType(typeof(Employee))]
-        [Route("~/api/Clients/{id}/{Controller}")]
         public IHttpActionResult GetEmployeeByClientID(int CID)
         {
             var user = db.sp_GetEmployeeByClient(CID);
@@ -53,6 +52,7 @@ namespace OnshoreKPI_API.Controllers
 
         // GET: Employees on Team by ClientID/Team ID
         [HttpGet]
+        [ResponseType(typeof(Employee))]
         //http://localhost:62684/api/employees?cid=1&TID=1
         public IHttpActionResult GetEmployeeByTeamID(int CID, int TID)
         {
