@@ -1,0 +1,23 @@
+﻿Finished?
+
+--Teams
+	Get All Teams By Client: done
+
+--Employee
+	Get Employees By Client: done
+	Get Employees By Email: done (login controller)
+	Get Employees By Team: done
+
+--Reporting
+	Get Reports by date and Employee: done
+	Report by client: done
+	report by date: done
+	report by employee: done
+	report by name: done
+	report by proxy: done
+	report by team: done
+	report by self: done
+
+
+--Notes:
+	

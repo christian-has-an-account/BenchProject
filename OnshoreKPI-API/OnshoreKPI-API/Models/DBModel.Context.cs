@@ -189,13 +189,17 @@ namespace OnshoreKPI_API.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetReportsByProxySubmission_Result>("sp_GetReportsByProxySubmission", nameParameter);
         }
     
-        public virtual ObjectResult<sp_GetReportsByTeam_Result> sp_GetReportsByTeam(Nullable<int> teamID)
+        public virtual ObjectResult<sp_GetReportsByTeam_Result> sp_GetReportsByTeam(Nullable<int> clientID, Nullable<int> teamID)
         {
+            var clientIDParameter = clientID.HasValue ?
+                new ObjectParameter("ClientID", clientID) :
+                new ObjectParameter("ClientID", typeof(int));
+    
             var teamIDParameter = teamID.HasValue ?
                 new ObjectParameter("TeamID", teamID) :
                 new ObjectParameter("TeamID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetReportsByTeam_Result>("sp_GetReportsByTeam", teamIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetReportsByTeam_Result>("sp_GetReportsByTeam", clientIDParameter, teamIDParameter);
         }
     
         public virtual ObjectResult<sp_GetReportsSelfSubmission_Result> sp_GetReportsSelfSubmission(string name)

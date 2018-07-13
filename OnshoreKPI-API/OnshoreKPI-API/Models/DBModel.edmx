@@ -216,6 +216,7 @@ warning 6002: The table/view 'KPI.db.dbo.Reporting' does not have a primary key 
           <Parameter Name="Name" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_GetReportsByTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientID" Type="int" Mode="In" />
           <Parameter Name="TeamID" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_GetReportsSelfSubmission" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -459,7 +460,8 @@ warning 6002: The table/view 'KPI.db.dbo.Reporting' does not have a primary key 
           <Parameter Name="Name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_GetReportsByTeam" ReturnType="Collection(KPI.dbModel.sp_GetReportsByTeam_Result)">
-          <Parameter Name="TeamID" Mode="In" Type="Int32" />
+          <Parameter Name="ClientID" Mode="In" Type="Int32" />
+            <Parameter Name="TeamID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_GetReportsSelfSubmission" ReturnType="Collection(KPI.dbModel.sp_GetReportsSelfSubmission_Result)">
           <Parameter Name="Name" Mode="In" Type="String" />
