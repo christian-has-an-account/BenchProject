@@ -86,21 +86,21 @@ namespace OnshoreKPI_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = role.RoleID }, role);
         }
 
-        // DELETE: api/Roles/5
-        [ResponseType(typeof(Role))]
-        public async Task<IHttpActionResult> DeleteRole(int id)
-        {
-            Role role = await db.Roles.FindAsync(id);
-            if (role == null)
-            {
-                return NotFound();
-            }
+        //// DELETE: api/Roles/5
+        //[ResponseType(typeof(Role))]
+        //public async Task<IHttpActionResult> DeleteRole(int id)
+        //{
+        //    Role role = await db.Roles.FindAsync(id);
+        //    if (role == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            db.Roles.Remove(role);
-            await db.SaveChangesAsync();
+        //    db.Roles.Remove(role);
+        //    await db.SaveChangesAsync();
 
-            return Ok(role);
-        }
+        //    return Ok(role);
+        //}
 
         protected override void Dispose(bool disposing)
         {

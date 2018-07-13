@@ -37,9 +37,25 @@ namespace OnshoreKPI_API.Controllers
             return Ok(team);
         }
 
+        //Get Teams of client by ClientID
+        [HttpGet]
+        [ResponseType(typeof(sp_GetAllTeamsByClient_Result))]
+        public IHttpActionResult GetTeamByClientId(int CID)
+        {
+               var team =  db.sp_GetAllTeamsByClient(CID);
+            {
+                if(team == null)
+                {
+                    return NotFound();
+                }
+                return Ok(team);
+            }
+                
+        }
+
         // PUT: api/Teams/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutTeam(int id, Team team)
+        public async Task<IHttpActionResult> PutTeam(int id, Team team)  
         {
             if (!ModelState.IsValid)
             {
@@ -87,21 +103,21 @@ namespace OnshoreKPI_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = team.TeamID }, team);
         }
 
-        // DELETE: api/Teams/5
-        [ResponseType(typeof(Team))]
-        public async Task<IHttpActionResult> DeleteTeam(int id)
-        {
-            Team team = await db.Teams.FindAsync(id);
-            if (team == null)
-            {
-                return NotFound();
-            }
+        //// DELETE: api/Teams/5
+        //[ResponseType(typeof(Team))]
+        //public async Task<IHttpActionResult> DeleteTeam(int id)
+        //{
+        //    Team team = await db.Teams.FindAsync(id);
+        //    if (team == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            db.Teams.Remove(team);
-            await db.SaveChangesAsync();
+        //    db.Teams.Remove(team);
+        //    await db.SaveChangesAsync();
 
-            return Ok(team);
-        }
+        //    return Ok(team);
+        //}
 
         protected override void Dispose(bool disposing)
         {

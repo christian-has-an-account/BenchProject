@@ -1,35 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="KPI.dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
+<Schema Namespace="KPI.dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Client">
     <Key>
       <PropertyRef Name="ClientID" />
     </Key>
-    <Property Name="ClientID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-    <Property Name="ClientName" Nullable="false" MaxLength="50" Type="varchar" />
+    <Property Name="ClientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClientName" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Employee">
     <Key>
       <PropertyRef Name="EmployeeID" />
     </Key>
-    <Property Name="EmployeeID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-    <Property Name="RoleID" Nullable="false" Type="int" />
+    <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
     <Property Name="ClientID" Type="int" />
     <Property Name="ClientID2" Type="int" />
     <Property Name="ClientID3" Type="int" />
     <Property Name="ClientID4" Type="int" />
     <Property Name="TeamID" Type="int" />
     <Property Name="TypeID" Type="int" />
-    <Property Name="FirstName" Nullable="false" MaxLength="35" Type="nchar" />
-    <Property Name="LastName" Nullable="false" MaxLength="35" Type="nchar" />
-    <Property Name="Email" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="Password" Nullable="false" MaxLength="25" Type="nvarchar" />
+    <Property Name="FirstName" Type="nchar" MaxLength="35" Nullable="false" />
+    <Property Name="LastName" Type="nchar" MaxLength="35" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="25" Nullable="false" />
   </EntityType>
   <EntityType Name="EmployeeType">
     <Key>
       <PropertyRef Name="TypeID" />
     </Key>
-    <Property Name="TypeID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-    <Property Name="TypeName" Nullable="false" MaxLength="50" Type="varchar" />
+    <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'KPI.db.dbo.Reporting' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -48,43 +48,43 @@ warning 6002: The table/view 'KPI.db.dbo.Reporting' does not have a primary key 
       <PropertyRef Name="Email" />
       <PropertyRef Name="Task" />
     </Key>
-    <Property Name="ReportingID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-    <Property Name="EmployeeID" Nullable="false" Type="int" />
-    <Property Name="ClientID" Nullable="false" Type="int" />
-    <Property Name="TeamID" Nullable="false" Type="int" />
-    <Property Name="StartTime" Nullable="false" Precision="0" Type="time" />
-    <Property Name="CompletionTime" Nullable="false" Precision="0" Type="time" />
-    <Property Name="Name" Nullable="false" MaxLength="35" Type="varchar" />
-    <Property Name="Name2" Nullable="false" MaxLength="35" Type="varchar" />
-    <Property Name="Date" Nullable="false" Type="date" />
-    <Property Name="Quantity" Nullable="false" Type="int" />
+    <Property Name="ReportingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="ClientID" Type="int" Nullable="false" />
+    <Property Name="TeamID" Type="int" Nullable="false" />
+    <Property Name="StartTime" Type="time" Precision="0" Nullable="false" />
+    <Property Name="CompletionTime" Type="time" Precision="0" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="Name2" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
     <Property Name="TextScriptExecutionOrders" Type="int" />
     <Property Name="TextScriptCreationErrors" Type="int" />
-    <Property Name="CardPoints" Precision="2" Scale="2" Type="decimal" />
-    <Property Name="TimeSpent" Precision="2" Scale="2" Type="decimal" />
-    <Property Name="HoursComplete" Precision="2" Scale="2" Type="decimal" />
-    <Property Name="HoursEstimated" Precision="2" Scale="2" Type="decimal" />
-    <Property Name="Email" Nullable="false" MaxLength="60" Type="varchar" />
-    <Property Name="Task" Nullable="false" Type="text" />
+    <Property Name="CardPoints" Type="decimal" Precision="2" Scale="2" />
+    <Property Name="TimeSpent" Type="decimal" Precision="2" Scale="2" />
+    <Property Name="HoursComplete" Type="decimal" Precision="2" Scale="2" />
+    <Property Name="HoursEstimated" Type="decimal" Precision="2" Scale="2" />
+    <Property Name="Email" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="Task" Type="text" Nullable="false" />
   </EntityType>
   <EntityType Name="Roles">
     <Key>
       <PropertyRef Name="RoleID" />
     </Key>
-    <Property Name="RoleID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-    <Property Name="RoleName" Nullable="false" MaxLength="35" Type="varchar" />
+    <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" MaxLength="35" Nullable="false" />
   </EntityType>
   <EntityType Name="Team">
     <Key>
       <PropertyRef Name="TeamID" />
     </Key>
-    <Property Name="TeamID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-    <Property Name="ClientID" Nullable="false" Type="int" />
-    <Property Name="TeamName" Nullable="false" MaxLength="50" Type="varchar" />
+    <Property Name="TeamID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClientID" Type="int" Nullable="false" />
+    <Property Name="TeamName" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <Association Name="FK Employee FROM Client">
-    <End Type="Self.Client" Multiplicity="0..1" Role="Client" />
-    <End Type="Self.Employee" Multiplicity="*" Role="Employee" />
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Client">
         <PropertyRef Name="ClientID" />
@@ -95,8 +95,8 @@ warning 6002: The table/view 'KPI.db.dbo.Reporting' does not have a primary key 
     </ReferentialConstraint>
   </Association>
   <Association Name="FK Employee FROM Roles">
-    <End Type="Self.Roles" Multiplicity="1" Role="Roles" />
-    <End Type="Self.Employee" Multiplicity="*" Role="Employee" />
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Roles">
         <PropertyRef Name="RoleID" />
@@ -107,8 +107,8 @@ warning 6002: The table/view 'KPI.db.dbo.Reporting' does not have a primary key 
     </ReferentialConstraint>
   </Association>
   <Association Name="FK Employee FROM Team">
-    <End Type="Self.Team" Multiplicity="0..1" Role="Team" />
-    <End Type="Self.Employee" Multiplicity="*" Role="Employee" />
+    <End Role="Team" Type="Self.Team" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Team">
         <PropertyRef Name="TeamID" />
@@ -119,8 +119,8 @@ warning 6002: The table/view 'KPI.db.dbo.Reporting' does not have a primary key 
     </ReferentialConstraint>
   </Association>
   <Association Name="FK Employee FROM Type">
-    <End Type="Self.EmployeeType" Multiplicity="0..1" Role="EmployeeType" />
-    <End Type="Self.Employee" Multiplicity="*" Role="Employee" />
+    <End Role="EmployeeType" Type="Self.EmployeeType" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="EmployeeType">
         <PropertyRef Name="TypeID" />
@@ -131,8 +131,8 @@ warning 6002: The table/view 'KPI.db.dbo.Reporting' does not have a primary key 
     </ReferentialConstraint>
   </Association>
   <Association Name="FK Reporting FROM Client">
-    <End Type="Self.Client" Multiplicity="1" Role="Client" />
-    <End Type="Self.Reporting" Multiplicity="*" Role="Reporting" />
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Reporting" Type="Self.Reporting" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Client">
         <PropertyRef Name="ClientID" />
@@ -143,8 +143,8 @@ warning 6002: The table/view 'KPI.db.dbo.Reporting' does not have a primary key 
     </ReferentialConstraint>
   </Association>
   <Association Name="FK Reporting FROM Employee">
-    <End Type="Self.Employee" Multiplicity="1" Role="Employee" />
-    <End Type="Self.Reporting" Multiplicity="*" Role="Reporting" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Reporting" Type="Self.Reporting" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Employee">
         <PropertyRef Name="EmployeeID" />
@@ -155,8 +155,8 @@ warning 6002: The table/view 'KPI.db.dbo.Reporting' does not have a primary key 
     </ReferentialConstraint>
   </Association>
   <Association Name="FK Reporting FROM Team">
-    <End Type="Self.Team" Multiplicity="1" Role="Team" />
-    <End Type="Self.Reporting" Multiplicity="*" Role="Reporting" />
+    <End Role="Team" Type="Self.Team" Multiplicity="1" />
+    <End Role="Reporting" Type="Self.Reporting" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Team">
         <PropertyRef Name="TeamID" />
@@ -167,8 +167,8 @@ warning 6002: The table/view 'KPI.db.dbo.Reporting' does not have a primary key 
     </ReferentialConstraint>
   </Association>
   <Association Name="FK Team FROM Client">
-    <End Type="Self.Client" Multiplicity="1" Role="Client" />
-    <End Type="Self.Team" Multiplicity="*" Role="Team" />
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Team" Type="Self.Team" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Client">
         <PropertyRef Name="ClientID" />
@@ -178,25 +178,6 @@ warning 6002: The table/view 'KPI.db.dbo.Reporting' does not have a primary key 
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="sp_DeleteClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="ClientID" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_DeleteReportsByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="ReportingID" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_DeleteRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="RoleID" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_DeleteTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="ClientID" Type="int" Mode="In" />
-    <Parameter Name="TeamID" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_GetAllClients" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="sp_GetAllEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="sp_GetAllEmployeeTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="sp_GetAllReports" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="sp_GetAllRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="sp_GetAllTeams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_GetAllTeamsByClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ClientID" Type="int" Mode="In" />
   </Function>
@@ -209,6 +190,10 @@ warning 6002: The table/view 'KPI.db.dbo.Reporting' does not have a primary key 
   <Function Name="sp_GetEmployeeByTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ClientID" Type="int" Mode="In" />
     <Parameter Name="TeamID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetReportByDateandEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+    <Parameter Name="Date" Type="date" Mode="In" />
   </Function>
   <Function Name="sp_GetReportsByClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ClientID" Type="int" Mode="In" />
@@ -226,99 +211,11 @@ warning 6002: The table/view 'KPI.db.dbo.Reporting' does not have a primary key 
     <Parameter Name="Name" Type="varchar" Mode="In" />
   </Function>
   <Function Name="sp_GetReportsByTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ClientID" Type="int" Mode="In" />
     <Parameter Name="TeamID" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_GetReportsSelfSubmission" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Name" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="sp_NewClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="ClientName" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="sp_NewEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="RoleID" Type="int" Mode="In" />
-    <Parameter Name="ClientID" Type="int" Mode="In" />
-    <Parameter Name="TeamID" Type="int" Mode="In" />
-    <Parameter Name="TypeID" Type="int" Mode="In" />
-    <Parameter Name="FirstName" Type="nchar" Mode="In" />
-    <Parameter Name="LastName" Type="nchar" Mode="In" />
-    <Parameter Name="Email" Type="nvarchar(max)" Mode="In" />
-    <Parameter Name="Password" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="sp_NewEmployeeType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="TypeName" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="sp_NewReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="ReportingID" Type="int" Mode="In" />
-    <Parameter Name="EmployeeID" Type="int" Mode="In" />
-    <Parameter Name="ClientID" Type="int" Mode="In" />
-    <Parameter Name="TeamID" Type="int" Mode="In" />
-    <Parameter Name="StartTime" Type="datetime" Mode="In" />
-    <Parameter Name="CompletionTime" Type="datetime" Mode="In" />
-    <Parameter Name="Name" Type="varchar" Mode="In" />
-    <Parameter Name="Name2" Type="varchar" Mode="In" />
-    <Parameter Name="Date" Type="date" Mode="In" />
-    <Parameter Name="Quantity" Type="int" Mode="In" />
-    <Parameter Name="TextScriptExecutionOrders" Type="int" Mode="In" />
-    <Parameter Name="TextScriptCreationErrors" Type="int" Mode="In" />
-    <Parameter Name="CardPoints" Type="decimal" Mode="In" />
-    <Parameter Name="TimeSpent" Type="decimal" Mode="In" />
-    <Parameter Name="HoursEstimated" Type="decimal" Mode="In" />
-    <Parameter Name="HoursComplete" Type="decimal" Mode="In" />
-    <Parameter Name="Email" Type="varchar" Mode="In" />
-    <Parameter Name="Task" Type="text" Mode="In" />
-  </Function>
-  <Function Name="sp_NewRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="RoleName" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="sp_NewTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="TeamName" Type="varchar" Mode="In" />
-    <Parameter Name="ClientID" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_UpdateClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="ClientID" Type="int" Mode="In" />
-    <Parameter Name="ClientName" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="sp_UpdateEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="EmployeeID" Type="int" Mode="In" />
-    <Parameter Name="RoleID" Type="int" Mode="In" />
-    <Parameter Name="ClientID" Type="int" Mode="In" />
-    <Parameter Name="ClientID2" Type="int" Mode="In" />
-    <Parameter Name="ClientID3" Type="int" Mode="In" />
-    <Parameter Name="ClientID4" Type="int" Mode="In" />
-    <Parameter Name="TeamID" Type="int" Mode="In" />
-    <Parameter Name="TypeID" Type="int" Mode="In" />
-    <Parameter Name="FirstName" Type="nchar" Mode="In" />
-    <Parameter Name="LastName" Type="nchar" Mode="In" />
-    <Parameter Name="Email" Type="nvarchar(max)" Mode="In" />
-    <Parameter Name="Password" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="sp_UpdateEmployeeType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="TypeID" Type="int" Mode="In" />
-    <Parameter Name="TypeName" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="sp_UpdateReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="ReportingID" Type="int" Mode="In" />
-    <Parameter Name="StartTime" Type="datetime" Mode="In" />
-    <Parameter Name="CompletionTime" Type="datetime" Mode="In" />
-    <Parameter Name="Name" Type="varchar" Mode="In" />
-    <Parameter Name="Date" Type="date" Mode="In" />
-    <Parameter Name="Quantity" Type="int" Mode="In" />
-    <Parameter Name="TextScriptExecutionOrders" Type="int" Mode="In" />
-    <Parameter Name="TextScriptCreationErrors" Type="int" Mode="In" />
-    <Parameter Name="CardPoints" Type="decimal" Mode="In" />
-    <Parameter Name="TimeSpent" Type="decimal" Mode="In" />
-    <Parameter Name="HoursEstimated" Type="decimal" Mode="In" />
-    <Parameter Name="HoursComplete" Type="decimal" Mode="In" />
-    <Parameter Name="Task" Type="text" Mode="In" />
-  </Function>
-  <Function Name="sp_UpdateRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="RoleID" Type="int" Mode="In" />
-    <Parameter Name="RoleName" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="sp_UpdateTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="TeamID" Type="int" Mode="In" />
-    <Parameter Name="ClientID" Type="int" Mode="In" />
-    <Parameter Name="TeamName" Type="varchar" Mode="In" />
   </Function>
   <EntityContainer Name="KPIdbModelStoreContainer">
     <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
@@ -349,36 +246,36 @@ warning 6002: The table/view 'KPI.db.dbo.Reporting' does not have a primary key 
     FROM [dbo].[Reporting] AS [Reporting]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK Employee FROM Client" Association="Self.FK Employee FROM Client">
-      <End EntitySet="Client" Role="Client" />
-      <End EntitySet="Employee" Role="Employee" />
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Employee" EntitySet="Employee" />
     </AssociationSet>
     <AssociationSet Name="FK Employee FROM Roles" Association="Self.FK Employee FROM Roles">
-      <End EntitySet="Roles" Role="Roles" />
-      <End EntitySet="Employee" Role="Employee" />
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Employee" EntitySet="Employee" />
     </AssociationSet>
     <AssociationSet Name="FK Employee FROM Team" Association="Self.FK Employee FROM Team">
-      <End EntitySet="Team" Role="Team" />
-      <End EntitySet="Employee" Role="Employee" />
+      <End Role="Team" EntitySet="Team" />
+      <End Role="Employee" EntitySet="Employee" />
     </AssociationSet>
     <AssociationSet Name="FK Employee FROM Type" Association="Self.FK Employee FROM Type">
-      <End EntitySet="EmployeeType" Role="EmployeeType" />
-      <End EntitySet="Employee" Role="Employee" />
+      <End Role="EmployeeType" EntitySet="EmployeeType" />
+      <End Role="Employee" EntitySet="Employee" />
     </AssociationSet>
     <AssociationSet Name="FK Reporting FROM Client" Association="Self.FK Reporting FROM Client">
-      <End EntitySet="Client" Role="Client" />
-      <End EntitySet="Reporting" Role="Reporting" />
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Reporting" EntitySet="Reporting" />
     </AssociationSet>
     <AssociationSet Name="FK Reporting FROM Employee" Association="Self.FK Reporting FROM Employee">
-      <End EntitySet="Employee" Role="Employee" />
-      <End EntitySet="Reporting" Role="Reporting" />
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Reporting" EntitySet="Reporting" />
     </AssociationSet>
     <AssociationSet Name="FK Reporting FROM Team" Association="Self.FK Reporting FROM Team">
-      <End EntitySet="Team" Role="Team" />
-      <End EntitySet="Reporting" Role="Reporting" />
+      <End Role="Team" EntitySet="Team" />
+      <End Role="Reporting" EntitySet="Reporting" />
     </AssociationSet>
     <AssociationSet Name="FK Team FROM Client" Association="Self.FK Team FROM Client">
-      <End EntitySet="Client" Role="Client" />
-      <End EntitySet="Team" Role="Team" />
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Team" EntitySet="Team" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -189,13 +189,17 @@ namespace OnshoreKPI_API.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetReportsByProxySubmission_Result>("sp_GetReportsByProxySubmission", nameParameter);
         }
     
-        public virtual ObjectResult<sp_GetReportsByTeam_Result> sp_GetReportsByTeam(Nullable<int> teamID)
+        public virtual ObjectResult<sp_GetReportsByTeam_Result> sp_GetReportsByTeam(Nullable<int> clientID, Nullable<int> teamID)
         {
+            var clientIDParameter = clientID.HasValue ?
+                new ObjectParameter("ClientID", clientID) :
+                new ObjectParameter("ClientID", typeof(int));
+    
             var teamIDParameter = teamID.HasValue ?
                 new ObjectParameter("TeamID", teamID) :
                 new ObjectParameter("TeamID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetReportsByTeam_Result>("sp_GetReportsByTeam", teamIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetReportsByTeam_Result>("sp_GetReportsByTeam", clientIDParameter, teamIDParameter);
         }
     
         public virtual ObjectResult<sp_GetReportsSelfSubmission_Result> sp_GetReportsSelfSubmission(string name)
@@ -525,6 +529,19 @@ namespace OnshoreKPI_API.Models
                 new ObjectParameter("TeamName", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateTeam", teamIDParameter, clientIDParameter, teamNameParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetReportByDateandEmployee_Result> sp_GetReportByDateandEmployee(Nullable<int> employeeID, Nullable<System.DateTime> date)
+        {
+            var employeeIDParameter = employeeID.HasValue ?
+                new ObjectParameter("EmployeeID", employeeID) :
+                new ObjectParameter("EmployeeID", typeof(int));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetReportByDateandEmployee_Result>("sp_GetReportByDateandEmployee", employeeIDParameter, dateParameter);
         }
     }
 }

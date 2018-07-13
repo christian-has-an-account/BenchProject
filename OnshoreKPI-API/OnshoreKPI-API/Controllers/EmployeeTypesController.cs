@@ -86,21 +86,21 @@ namespace OnshoreKPI_API.Controllers
             return CreatedAtRoute("DefaultApi", new { id = employeeType.TypeID }, employeeType);
         }
 
-        // DELETE: api/EmployeeTypes/5
-        [ResponseType(typeof(EmployeeType))]
-        public async Task<IHttpActionResult> DeleteEmployeeType(int id)
-        {
-            EmployeeType employeeType = await db.EmployeeTypes.FindAsync(id);
-            if (employeeType == null)
-            {
-                return NotFound();
-            }
+        //// DELETE: api/EmployeeTypes/5
+        //[ResponseType(typeof(EmployeeType))]
+        //public async Task<IHttpActionResult> DeleteEmployeeType(int id)
+        //{
+        //    EmployeeType employeeType = await db.EmployeeTypes.FindAsync(id);
+        //    if (employeeType == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            db.EmployeeTypes.Remove(employeeType);
-            await db.SaveChangesAsync();
+        //    db.EmployeeTypes.Remove(employeeType);
+        //    await db.SaveChangesAsync();
 
-            return Ok(employeeType);
-        }
+        //    return Ok(employeeType);
+        //}
 
         protected override void Dispose(bool disposing)
         {
