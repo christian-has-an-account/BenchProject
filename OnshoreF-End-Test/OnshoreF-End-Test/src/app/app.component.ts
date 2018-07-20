@@ -6,6 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
-  private apiURL = 'http://localhost:53023';
+  title = 'OnshoreKPI';
 }
