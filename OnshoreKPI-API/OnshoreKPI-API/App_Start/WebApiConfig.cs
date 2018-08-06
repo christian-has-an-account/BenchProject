@@ -31,8 +31,12 @@ namespace OnshoreKPI_API
             // diplays JSON filenames in camel case
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
+
+            // TODO: Reactivate before Production Build!
+            /* --Disableing during dev for readability of error msgs.
             //Disables XML format for response
             config.Formatters.Remove(config.Formatters.XmlFormatter);
+            */
         }
     }
 }
