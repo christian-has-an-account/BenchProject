@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskName": "task-OnshoreKPI-FrontEnd",
+      "appliesTo": "/",
+      "type": "launch"
+    }
+  ]
+}

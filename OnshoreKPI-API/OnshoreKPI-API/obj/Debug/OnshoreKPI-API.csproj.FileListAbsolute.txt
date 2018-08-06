@@ -273,5 +273,4 @@ C:\Users\Onshore\Documents\GitHub\BenchProject\OnshoreKPI-API\OnshoreKPI-API\obj
 C:\Users\Onshore\Documents\GitHub\BenchProject\OnshoreKPI-API\OnshoreKPI-API\obj\Debug\OnshoreKPI-API.csproj.CopyComplete
 C:\Users\Onshore\Documents\GitHub\BenchProject\OnshoreKPI-API\OnshoreKPI-API\obj\Debug\OnshoreKPI-API.dll
 C:\Users\Onshore\Documents\GitHub\BenchProject\OnshoreKPI-API\OnshoreKPI-API\obj\Debug\OnshoreKPI-API.pdb
-C:\Users\Onshore\Documents\GitHub\BenchProject\OnshoreKPI-API\OnshoreKPI-API\bin\OnshoreKPI-API.dll.CodeAnalysisLog.xml
-C:\Users\Onshore\Documents\GitHub\BenchProject\OnshoreKPI-API\OnshoreKPI-API\bin\OnshoreKPI-API.dll.lastcodeanalysissucceeded
+C:\Users\Onshore\Documents\GitHub\BenchProject\OnshoreKPI-API\OnshoreKPI-API\obj\Debug\OnshoreKPI-API.csprojAssemblyReference.cache
