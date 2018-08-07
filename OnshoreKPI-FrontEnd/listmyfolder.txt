@@ -1,0 +1,22 @@
+ Volume in drive C is Windows
+ Volume Serial Number is F6AB-9A69
+
+ Directory of C:\Users\Onshore\Documents\GitHub\BenchProject\OnshoreKPI-FrontEnd
+
+07/26/2018  04:25 PM    <DIR>          .
+07/26/2018  04:25 PM    <DIR>          ..
+07/26/2018  01:12 PM               245 .editorconfig
+07/26/2018  01:12 PM               503 .gitignore
+07/26/2018  04:25 PM    <DIR>          .vs
+07/26/2018  01:12 PM             3,665 angular.json
+07/26/2018  01:12 PM    <DIR>          e2e
+07/26/2018  04:25 PM                 0 listmyfolder.txt
+07/26/2018  02:39 PM    <DIR>          node_modules
+07/26/2018  01:42 PM           390,788 package-lock.json
+07/26/2018  02:39 PM             1,330 package.json
+07/26/2018  01:12 PM             1,035 README.md
+07/26/2018  02:21 PM    <DIR>          src
+07/26/2018  01:12 PM               384 tsconfig.json
+07/26/2018  01:12 PM             2,805 tslint.json
+               9 File(s)        400,755 bytes
+               6 Dir(s)  395,311,079,424 bytes free
